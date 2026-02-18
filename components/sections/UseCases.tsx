@@ -1,0 +1,84 @@
+"use client";
+
+import React from "react";
+import { HeartPulse, BarChart3, Headset, Building2 } from "lucide-react";
+import { motion } from "framer-motion";
+
+const useCases = [
+    {
+        title: "Healthcare",
+        description: "Process sensitive patient records securely and generate valuable insights for diagnostics and research without exposing private data. Cube AI ensures compliance with stringent healthcare privacy regulations.",
+        icon: HeartPulse,
+    },
+    {
+        title: "Finance",
+        description: "Analyze confidential financial transactions, detect fraud, and produce secure financial reports with Cube AI's robust protections for sensitive data and computational integrity.",
+        icon: BarChart3,
+    },
+    {
+        title: "Customer Support",
+        description: "Deploy intelligent chatbots capable of handling sensitive user queries, providing personalized and private support, backed by Cube AI's secure data processing capabilities.",
+        icon: Headset,
+    },
+    {
+        title: "Enterprise AI",
+        description: "Build proprietary AI tools and workflows with confidence. Cube AI ensures the security of both proprietary models and sensitive enterprise data during AI development and deployment.",
+        icon: Building2,
+    },
+];
+
+const UseCases = () => {
+    return (
+        <section id="use-cases" className="py-24 bg-neutral-950 text-white">
+            <div className="container mx-auto px-4 md:px-6">
+                <div className="text-center max-w-3xl mx-auto mb-20">
+                    <h2 className="text-3xl md:text-5xl font-black mb-6 uppercase tracking-tight">
+                        Industry <span className="text-neutral-500">Solutions</span>
+                    </h2>
+                    <p className="text-neutral-400 text-lg">
+                        Cube AI is a versatile and reliable solution across various sectors where data security and compliance are paramount.
+                    </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                    {useCases.map((useCase, index) => (
+                        <motion.div
+                            key={useCase.title}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            className="flex flex-col items-center text-center"
+                        >
+                            <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mb-6 text-yellow-400">
+                                <useCase.icon className="w-8 h-8" />
+                            </div>
+                            <h3 className="text-xl font-bold mb-4">{useCase.title}</h3>
+                            <p className="text-neutral-400 text-sm leading-relaxed">
+                                {useCase.description}
+                            </p>
+                        </motion.div>
+                    ))}
+                </div>
+
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8 }}
+                    className="mt-20 pt-20 border-t border-neutral-900 text-center"
+                >
+                    <p className="text-xl text-neutral-300 mb-8 font-medium">Have questions or want to learn more?</p>
+                    <a
+                        href="mailto:info@ultraviolet.rs"
+                        className="inline-flex px-10 py-4 bg-yellow-400 text-black rounded-full font-bold hover:bg-yellow-300 transition-all shadow-lg shadow-yellow-400/10 hover:shadow-yellow-400/20"
+                    >
+                        Contact Us
+                    </a>
+                </motion.div>
+            </div>
+        </section>
+    );
+};
+
+export default UseCases;
