@@ -1,0 +1,12 @@
+{
+    "title": "Developer Guide",
+    "pages": [
+        "index",
+        "chat-ui",
+        "private-model-upload",
+        "hal",
+        "cvm-management",
+        "fine-tuning",
+        "auth-and-request-flow"
+    ]
+}
