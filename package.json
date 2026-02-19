@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "postinstall": "fumadocs-mdx",
-    "lint": "eslint"
+    "lint": "eslint",
+    "types:check": "fumadocs-mdx && next typegen && tsc --noEmit",
+    "lint:md": "markdownlint --disable MD013 MD033 MD007 MD029 MD059 MD024 MD025 -- content/docs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -29,6 +31,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "markdownlint-cli": "^0.44.0",
     "remark-mdx": "^3.1.1",
     "tailwindcss": "^4",
     "typescript": "^5"

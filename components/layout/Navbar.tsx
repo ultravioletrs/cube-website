@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, ChevronDown, Github } from "lucide-react";
+import { Menu, X, Github } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import BrandLogo from "@/components/BrandLogo";

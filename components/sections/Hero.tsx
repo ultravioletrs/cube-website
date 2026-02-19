@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
@@ -66,12 +67,12 @@ const Hero = () => {
                             >
                                 Talk to Sales
                             </a>
-                            <a
+                            <Link
                                 href="/docs"
                                 className="px-8 py-4 bg-white text-black border-2 border-neutral-200 rounded-full font-bold hover:border-black transition-all"
                             >
                                 Documentation
-                            </a>
+                            </Link>
                         </div>
                     </motion.div>
                 </div>

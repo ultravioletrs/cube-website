@@ -33,7 +33,7 @@ const Gateway = () => {
                                 uphold the highest standards of confidentiality and security.
                             </p>
                             <p>
-                                Whether you're working with pre-trained models or fine-tuning your
+                                Whether you&apos;re working with pre-trained models or fine-tuning your
                                 own, Cube AI simplifies the deployment process, enabling secure,
                                 scalable, and compliant AI solutions.
                             </p>
