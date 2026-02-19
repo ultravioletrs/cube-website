@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Twitter, Linkedin, Github, Mail, MessageSquare, MapPin } from "lucide-react";
+import Image from "next/image";
 
 const Footer = () => {
     return (
@@ -9,6 +10,13 @@ const Footer = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
                     {/* About */}
                     <div className="lg:col-span-2">
+                        <Image
+                            src="/favicon.svg"
+                            alt="Ultraviolet"
+                            width={100}
+                            height={100}
+                            className="mb-4"
+                        />
                         <h5 className="text-white text-lg font-bold mb-6">About Us</h5>
                         <p className="max-w-xs leading-relaxed">
                             Ultraviolet is a leading company specializing in confidential

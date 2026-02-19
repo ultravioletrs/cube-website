@@ -1,3 +1,8 @@
+---
+title: Route Management API
+description: API documentation for managing routing rules in Cube proxy
+---
+
 # Route Management API Documentation
 
 ## Overview

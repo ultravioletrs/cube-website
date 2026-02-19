@@ -5,10 +5,12 @@
 @theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-outfit), var(--font-sans);
-  
+
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
-  
+  --color-brand-secondary: hsl(var(--brand-secondary));
+  --color-brand-secondary-foreground: hsl(var(--brand-secondary-foreground));
+
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
 }
@@ -20,6 +22,8 @@
   --primary-foreground: 0 0% 98%;
   --muted-foreground: 0 0% 45.1%;
   --border: 0 0% 89.8%;
+  --brand-secondary: 210 100% 55%;
+  --brand-secondary-foreground: 0 0% 98%;
   --fd-layout-width: 1400px;
 }
 
@@ -30,6 +34,8 @@
   --primary-foreground: 0 0% 9%;
   --muted-foreground: 0 0% 63.9%;
   --border: 0 0% 14.9%;
+  --brand-secondary: 210 100% 55%;
+  --brand-secondary-foreground: 0 0% 98%;
 }
 
 body {
@@ -38,7 +44,12 @@ body {
   font-family: var(--font-sans);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-display);
   font-weight: 800;
   letter-spacing: -0.04em;

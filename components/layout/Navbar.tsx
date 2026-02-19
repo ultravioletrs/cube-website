@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Menu, X, ChevronDown, Github } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
+import BrandLogo from "@/components/BrandLogo";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -37,8 +38,8 @@ const Navbar = () => {
         >
             <div className="container mx-auto px-4 md:px-6">
                 <div className="flex items-center justify-between">
-                    <Link href="/" className="text-xl font-bold tracking-tighter text-black">
-                        CUBE AI
+                    <Link href="/" className="flex items-center">
+                        <BrandLogo mode="light" height={30} width={78} />
                     </Link>
 
                     {/* Desktop Nav */}

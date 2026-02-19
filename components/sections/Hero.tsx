@@ -7,19 +7,8 @@ import { motion } from "framer-motion";
 const Hero = () => {
     return (
         <section className="relative overflow-hidden bg-white">
-            {/* Header Image Pattern */}
-            <div className="container mx-auto px-4 md:px-6 mb-12">
-                <div className="relative h-[200px] md:h-[400px] w-full overflow-hidden rounded-2xl">
-                    <Image
-                        src="/img/header.avif"
-                        alt="Cube AI Header"
-                        fill
-                        className="object-cover"
-                        priority
-                    />
-                    <div className="absolute inset-0 bg-neutral-900/10" />
-                </div>
-            </div>
+            {/* Background Gradient */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-secondary/20 via-white to-white pointer-events-none" />
 
             {/* Main Hero Content */}
             <div className="container mx-auto px-4 md:px-6 py-12 lg:py-20">
