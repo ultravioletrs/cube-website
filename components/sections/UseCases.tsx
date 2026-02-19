@@ -29,7 +29,7 @@ const useCases = [
 
 const UseCases = () => {
     return (
-        <section id="use-cases" className="py-24 bg-neutral-950 text-white">
+        <section id="solutions" className="py-24 bg-neutral-950 text-white">
             <div className="container mx-auto px-4 md:px-6">
                 <div className="text-center max-w-3xl mx-auto mb-20">
                     <h2 className="text-3xl md:text-5xl font-black mb-6 uppercase tracking-tight">

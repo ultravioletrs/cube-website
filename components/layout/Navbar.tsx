@@ -24,7 +24,7 @@ const Navbar = () => {
         { name: "ARCHITECTURE", href: "#architecture" },
         { name: "DOCUMENTATION", href: "/docs" },
         { name: "ENTERPRISE", href: "#enterprise" },
-        { name: "CONTACT", href: "/contact" },
+        { name: "CONTACT", href: "mailto:info@ultraviolet.rs" },
     ];
 
     return (

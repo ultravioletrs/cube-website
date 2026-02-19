@@ -61,7 +61,7 @@ const Hero = () => {
 
                         <div className="mt-10 flex flex-wrap gap-4">
                             <a
-                                href="/contact"
+                                href="mailto:info@ultraviolet.rs"
                                 className="px-8 py-4 bg-black text-white rounded-full font-bold hover:bg-neutral-800 transition-all shadow-lg hover:shadow-xl"
                             >
                                 Talk to Sales

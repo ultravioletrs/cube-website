@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import { RootProvider } from 'fumadocs-ui/provider/next';
 
 const inter = Inter({
@@ -46,11 +44,7 @@ export default function RootLayout({
         className={`${inter.variable} ${outfit.variable} antialiased bg-white font-sans`}
       >
         <RootProvider>
-          <Navbar />
-          <main className="pt-[72px]">
-            {children}
-          </main>
-          <Footer />
+          {children}
         </RootProvider>
       </body>
     </html>
