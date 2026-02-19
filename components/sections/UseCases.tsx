@@ -7,22 +7,22 @@ import { motion } from "framer-motion";
 const useCases = [
     {
         title: "Healthcare",
-        description: "Process sensitive patient records securely and generate valuable insights for diagnostics and research without exposing private data. Cube AI ensures compliance with stringent healthcare privacy regulations.",
+        description: "Process patient records securely and generate diagnostic insights without exposing private data or violating regulations.",
         icon: HeartPulse,
     },
     {
         title: "Finance",
-        description: "Analyze confidential financial transactions, detect fraud, and produce secure financial reports with Cube AI's robust protections for sensitive data and computational integrity.",
+        description: "Analyze confidential transactions and detect fraud with robust protections for computational integrity.",
         icon: BarChart3,
     },
     {
         title: "Customer Support",
-        description: "Deploy intelligent chatbots capable of handling sensitive user queries, providing personalized and private support, backed by Cube AI's secure data processing capabilities.",
+        description: "Deploy private chatbots capable of handling sensitive queries with complete data security.",
         icon: Headset,
     },
     {
         title: "Enterprise AI",
-        description: "Build proprietary AI tools and workflows with confidence. Cube AI ensures the security of both proprietary models and sensitive enterprise data during AI development and deployment.",
+        description: "Protect proprietary models and sensitive internal data throughout development and deployment.",
         icon: Building2,
     },
 ];

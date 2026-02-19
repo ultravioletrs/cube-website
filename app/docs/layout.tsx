@@ -8,7 +8,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         <DocsLayout
             tree={source.getPageTree()}
             nav={{
-                title: <BrandLogo className="h-8 w-auto" height={30} width={78} />,
+                title: <BrandLogo className="h-10 w-auto" height={40} width={104} />,
             }}
         >
             {children}

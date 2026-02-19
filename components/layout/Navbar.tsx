@@ -39,7 +39,7 @@ const Navbar = () => {
             <div className="container mx-auto px-4 md:px-6">
                 <div className="flex items-center justify-between">
                     <Link href="/" className="flex items-center">
-                        <BrandLogo mode="light" height={30} width={78} />
+                        <BrandLogo mode="light" height={40} width={104} />
                     </Link>
 
                     {/* Desktop Nav */}
