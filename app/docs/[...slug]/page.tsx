@@ -2,6 +2,7 @@ import { source } from '@/lib/source';
 import { DocsBody, DocsDescription, DocsPage, DocsTitle } from 'fumadocs-ui/layouts/docs/page';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import defaultMdxComponents from 'fumadocs-ui/mdx';
 
 export default async function Page(props: {
     params: Promise<{ slug?: string[] }>;
@@ -10,21 +11,22 @@ export default async function Page(props: {
     const page = source.getPage(params.slug);
     if (!page) notFound();
 
-    const MDX = (page.data as any).body;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { body: MDX, toc, full } = page.data as any;
 
     return (
-        <DocsPage toc={(page.data as any).toc} full={(page.data as any).full}>
+        <DocsPage toc={toc} full={full}>
             <DocsTitle>{page.data.title}</DocsTitle>
             <DocsDescription>{page.data.description}</DocsDescription>
             <DocsBody>
-                <MDX />
+                <MDX components={{ ...defaultMdxComponents }} />
             </DocsBody>
         </DocsPage>
     );
 }
 
 export async function generateStaticParams() {
-    return source.generateParams();
+    return source.generateParams().filter((p) => p.slug && p.slug.length > 0);
 }
 
 export async function generateMetadata(props: {

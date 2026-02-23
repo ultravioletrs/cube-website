@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, ChevronDown, Github } from "lucide-react";
+import { Menu, X, Github } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
+import BrandLogo from "@/components/BrandLogo";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -23,7 +24,7 @@ const Navbar = () => {
         { name: "ARCHITECTURE", href: "#architecture" },
         { name: "DOCUMENTATION", href: "/docs" },
         { name: "ENTERPRISE", href: "#enterprise" },
-        { name: "CONTACT", href: "/contact" },
+        { name: "CONTACT", href: "mailto:info@ultraviolet.rs" },
     ];
 
     return (
@@ -37,8 +38,8 @@ const Navbar = () => {
         >
             <div className="container mx-auto px-4 md:px-6">
                 <div className="flex items-center justify-between">
-                    <Link href="/" className="text-xl font-bold tracking-tighter text-black">
-                        CUBE AI
+                    <Link href="/" className="flex items-center">
+                        <BrandLogo mode="light" height={40} width={104} />
                     </Link>
 
                     {/* Desktop Nav */}

@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 const Gateway = () => {
     return (
-        <section id="gateway" className="py-24 bg-neutral-50 overflow-hidden">
+        <section id="enterprise" className="py-24 bg-neutral-50 overflow-hidden">
             <div className="container mx-auto px-4 md:px-6">
                 {/* Deploy Any LLM Section */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-32">
@@ -22,21 +22,20 @@ const Gateway = () => {
                         </h2>
                         <div className="space-y-6 text-neutral-600 text-lg leading-relaxed">
                             <p>
-                                Cube AI empowers organizations to deploy any Large Language Model
-                                (LLM) securely and efficiently, integrating seamlessly with
-                                leading platforms like Ollama and Hugging Face.
+                                Deploy any LLM securely with native support for Ollama and Hugging Face.
+                                Cube AI simplifies the deployment process while maintaining the highest
+                                standards of confidentiality.
                             </p>
-                            <p>
-                                With Cube AI, you can protect sensitive user prompts and data by
-                                leveraging Trusted Execution Environments (TEEs). This ensures
-                                that your AI applications not only perform optimally but also
-                                uphold the highest standards of confidentiality and security.
-                            </p>
-                            <p>
-                                Whether you're working with pre-trained models or fine-tuning your
-                                own, Cube AI simplifies the deployment process, enabling secure,
-                                scalable, and compliant AI solutions.
-                            </p>
+                            <ul className="space-y-3">
+                                <li className="flex items-start gap-2">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-black mt-2.5 shrink-0" />
+                                    <span>Protect sensitive user prompts and model weights</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-black mt-2.5 shrink-0" />
+                                    <span>Secure, scalable, and compliant execution</span>
+                                </li>
+                            </ul>
                         </div>
                     </motion.div>
 
@@ -86,19 +85,11 @@ const Gateway = () => {
                         </h2>
                         <div className="space-y-6 text-neutral-600 text-lg leading-relaxed">
                             <p>
-                                The AI Gateway is a critical component of Cube AI, delivering
-                                built-in <strong className="text-black">Security, Observability, and Governance</strong> to AI
-                                workloads.
+                                Built-in <strong className="text-black">Security, Observability, and Governance</strong> for AI workloads.
                             </p>
                             <p>
-                                This gateway safeguards API communications by implementing
-                                advanced security measures, ensuring that data flows and requests
-                                to LLMs are handled with confidentiality and integrity.
-                            </p>
-                            <p>
-                                In addition, the AI Gateway enforces governance policies, allowing
-                                organizations to control access, usage, and compliance with
-                                internal and external regulations.
+                                The AI Gateway safeguards API communications and enforces
+                                compliance policies, ensuring total control over access and usage.
                             </p>
                         </div>
                     </motion.div>

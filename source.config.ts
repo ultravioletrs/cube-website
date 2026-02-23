@@ -14,8 +14,10 @@ export const docs = defineDocs({
     },
 });
 
+import remarkMdx from 'remark-mdx';
+
 export default defineConfig({
     mdxOptions: {
-        remarkPlugins: [],
+        remarkPlugins: [remarkMdx],
     },
 });

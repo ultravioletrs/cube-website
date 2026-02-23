@@ -7,40 +7,40 @@ import { motion } from "framer-motion";
 const useCases = [
     {
         title: "Healthcare",
-        description: "Process sensitive patient records securely and generate valuable insights for diagnostics and research without exposing private data. Cube AI ensures compliance with stringent healthcare privacy regulations.",
+        description: "Process patient records securely and generate diagnostic insights without exposing private data or violating regulations.",
         icon: HeartPulse,
     },
     {
         title: "Finance",
-        description: "Analyze confidential financial transactions, detect fraud, and produce secure financial reports with Cube AI's robust protections for sensitive data and computational integrity.",
+        description: "Analyze confidential transactions and detect fraud with robust protections for computational integrity.",
         icon: BarChart3,
     },
     {
         title: "Customer Support",
-        description: "Deploy intelligent chatbots capable of handling sensitive user queries, providing personalized and private support, backed by Cube AI's secure data processing capabilities.",
+        description: "Deploy private chatbots capable of handling sensitive queries with complete data security.",
         icon: Headset,
     },
     {
         title: "Enterprise AI",
-        description: "Build proprietary AI tools and workflows with confidence. Cube AI ensures the security of both proprietary models and sensitive enterprise data during AI development and deployment.",
+        description: "Protect proprietary models and sensitive internal data throughout development and deployment.",
         icon: Building2,
     },
 ];
 
 const UseCases = () => {
     return (
-        <section id="use-cases" className="py-24 bg-neutral-950 text-white">
+        <section id="solutions" className="py-32 bg-neutral-950 text-white">
             <div className="container mx-auto px-4 md:px-6">
-                <div className="text-center max-w-3xl mx-auto mb-20">
+                <div className="text-center max-w-3xl mx-auto mb-24">
                     <h2 className="text-3xl md:text-5xl font-black mb-6 uppercase tracking-tight">
                         Industry <span className="text-neutral-500">Solutions</span>
                     </h2>
-                    <p className="text-neutral-400 text-lg">
+                    <p className="text-neutral-400 text-xl">
                         Cube AI is a versatile and reliable solution across various sectors where data security and compliance are paramount.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
                     {useCases.map((useCase, index) => (
                         <motion.div
                             key={useCase.title}
@@ -53,8 +53,8 @@ const UseCases = () => {
                             <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mb-6 text-yellow-400">
                                 <useCase.icon className="w-8 h-8" />
                             </div>
-                            <h3 className="text-xl font-bold mb-4">{useCase.title}</h3>
-                            <p className="text-neutral-400 text-sm leading-relaxed">
+                            <h3 className="text-2xl font-bold mb-5">{useCase.title}</h3>
+                            <p className="text-neutral-400 text-base leading-relaxed">
                                 {useCase.description}
                             </p>
                         </motion.div>
@@ -66,9 +66,9 @@ const UseCases = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
-                    className="mt-20 pt-20 border-t border-neutral-900 text-center"
+                    className="mt-24 pt-24 border-t border-neutral-900 text-center"
                 >
-                    <p className="text-xl text-neutral-300 mb-8 font-medium">Have questions or want to learn more?</p>
+                    <p className="text-2xl text-neutral-300 mb-10 font-medium">Have questions or want to learn more?</p>
                     <a
                         href="mailto:info@ultraviolet.rs"
                         className="inline-flex px-10 py-4 bg-yellow-400 text-black rounded-full font-bold hover:bg-yellow-300 transition-all shadow-lg shadow-yellow-400/10 hover:shadow-yellow-400/20"

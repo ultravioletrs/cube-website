@@ -1,119 +1,75 @@
 import React from "react";
 import Link from "next/link";
-import { Twitter, Linkedin, Github, Mail, MessageSquare, MapPin } from "lucide-react";
+
+import Image from "next/image";
 
 const Footer = () => {
     return (
-        <footer className="bg-neutral-950 text-neutral-400 py-16 border-t border-neutral-900">
+        <footer className="bg-muted/50 border-t py-16 text-base">
             <div className="container mx-auto px-4 md:px-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
-                    {/* About */}
-                    <div className="lg:col-span-2">
-                        <h5 className="text-white text-lg font-bold mb-6">About Us</h5>
-                        <p className="max-w-xs leading-relaxed">
-                            Ultraviolet is a leading company specializing in confidential
-                            computing, cloud security, AI/ML, multi-party computation, and
-                            secure data sharing.
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+                    <div className="md:col-span-1">
+                        <Link href="https://www.ultraviolet.rs/" target="_blank" rel="noopener noreferrer" className="inline-block mb-4">
+                            <Image
+                                src="/img/ultraviolet-logo.svg"
+                                alt="Ultraviolet"
+                                width={160}
+                                height={40}
+                                className="h-10 w-auto dark:invert"
+                            />
+                        </Link>
+                        <p className="text-muted-foreground">
+                            Specializing in confidential computing, cloud security, AI/ML, and secure data sharing.
                         </p>
                     </div>
 
-                    {/* Products */}
                     <div>
-                        <h5 className="text-white text-sm font-bold tracking-widest uppercase mb-6">Products</h5>
-                        <ul className="space-y-4 text-sm">
-                            <li>
-                                <Link href="https://prism.ultraviolet.rs" className="hover:text-white transition-colors">Prism AI</Link>
-                            </li>
-                            <li>
-                                <Link href="https://cocos.ultraviolet.rs" className="hover:text-white transition-colors">Cocos AI</Link>
-                            </li>
-                            <li>
-                                <Link href="#" className="text-white">Cube AI</Link>
-                            </li>
-                        </ul>
-                        <h5 className="text-white text-sm font-bold tracking-widest uppercase mt-8 mb-6">Resources</h5>
-                        <ul className="space-y-4 text-sm">
-                            <li>
-                                <a
-                                    href="https://docs.google.com/presentation/d/1UJR6HKiBV3r56SyMNZvO3ylek8VFmNojbFkTC-bawBY/export/pdf"
-                                    className="hover:text-white transition-colors"
-                                >
-                                    Cube AI Datasheet
-                                </a>
-                            </li>
+                        <h3 className="font-bold text-xl mb-4">Product</h3>
+                        <ul className="space-y-2">
+                            <li><Link href="/docs" className="text-muted-foreground hover:text-primary">Cube AI Documentation</Link></li>
+                            <li><a href="https://docs.google.com/presentation/d/1UJR6HKiBV3r56SyMNZvO3ylek8VFmNojbFkTC-bawBY/export/pdf" className="text-muted-foreground hover:text-primary">Cube AI Datasheet</a></li>
                         </ul>
                     </div>
 
-                    {/* Legal */}
                     <div>
-                        <h5 className="text-white text-sm font-bold tracking-widest uppercase mb-6">Legal</h5>
-                        <div className="space-y-6">
-                            <div>
-                                <span className="text-xs font-bold text-neutral-600 block mb-2 tracking-widest">PRISM AI</span>
-                                <ul className="space-y-4 text-sm">
-                                    <li><Link href="https://ultraviolet.rs/prism/terms" className="hover:text-white transition-colors">Terms of Service</Link></li>
-                                    <li><Link href="https://ultraviolet.rs/prism/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
-                                </ul>
-                            </div>
-                            <div>
-                                <span className="text-xs font-bold text-neutral-600 block mb-2 tracking-widest">CUBE AI</span>
-                                <ul className="space-y-4 text-sm">
-                                    <li><Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link></li>
-                                    <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
-                                </ul>
-                            </div>
-                        </div>
+                        <h3 className="font-bold text-xl mb-4">Connect</h3>
+                        <ul className="space-y-2">
+                            <li><Link href="https://twitter.com/ultravioletrs" target="_blank" className="text-muted-foreground hover:text-primary">Twitter</Link></li>
+                            <li><Link href="https://linkedin.com/company/ultravioletrs" target="_blank" className="text-muted-foreground hover:text-primary">LinkedIn</Link></li>
+                            <li><Link href="https://github.com/ultravioletrs/cube" target="_blank" className="text-muted-foreground hover:text-primary">GitHub</Link></li>
+                            <li><Link href="mailto:info@ultraviolet.rs" className="text-muted-foreground hover:text-primary">Contact Us</Link></li>
+                        </ul>
                     </div>
 
-                    {/* Connect & Contact */}
                     <div>
-                        <h5 className="text-white text-sm font-bold tracking-widest uppercase mb-6">Connect</h5>
-                        <ul className="space-y-4 text-sm">
-                            <li>
-                                <a href="https://twitter.com/ultravioletrs" target="_blank" className="flex items-center space-x-3 hover:text-white transition-colors">
-                                    <Twitter className="w-4 h-4" />
-                                    <span>Twitter</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/company/ultravioletrs" target="_blank" className="flex items-center space-x-3 hover:text-white transition-colors">
-                                    <Linkedin className="w-4 h-4" />
-                                    <span>LinkedIn</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://github.com/ultravioletrs" target="_blank" className="flex items-center space-x-3 hover:text-white transition-colors">
-                                    <Github className="w-4 h-4" />
-                                    <span>GitHub</span>
-                                </a>
-                            </li>
-                        </ul>
-
-                        <h5 className="text-white text-sm font-bold tracking-widest uppercase mt-8 mb-6">Contact</h5>
-                        <ul className="space-y-4 text-sm">
-                            <li>
-                                <a href="mailto:info@ultraviolet.rs" className="flex items-center space-x-3 hover:text-white transition-colors">
-                                    <Mail className="w-4 h-4" />
-                                    <span>info@ultraviolet.rs</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://app.gitter.im/#/room/#Ultraviolet_community:gitter.im" target="_blank" className="flex items-center space-x-3 hover:text-white transition-colors">
-                                    <MessageSquare className="w-4 h-4" />
-                                    <span>Chat on Gitter</span>
-                                </a>
-                            </li>
-                            <li className="flex items-start space-x-3">
-                                <MapPin className="w-4 h-4 mt-1 flex-shrink-0" />
-                                <span>Bulevar Arsenija Carnojevica 103, 11000 Belgrade, Serbia</span>
-                            </li>
-                        </ul>
+                        <h3 className="font-bold text-xl mb-4">Newsletter</h3>
+                        <p className="text-muted-foreground mb-4">
+                            Stay updated with our latest developments.
+                        </p>
+                        <form className="flex gap-2">
+                            <input
+                                type="email"
+                                placeholder="Enter your email"
+                                className="bg-background border rounded-md px-3 py-2 flex-1 focus:outline-none focus:ring-2 focus:ring-primary"
+                                required
+                            />
+                            <button
+                                type="submit"
+                                className="bg-primary text-primary-foreground rounded-md px-4 py-2 font-medium hover:opacity-90 transition-opacity"
+                            >
+                                Subscribe
+                            </button>
+                        </form>
                     </div>
                 </div>
 
-                <div className="mt-16 pt-8 border-t border-neutral-900 flex flex-col md:flex-row justify-between items-center text-xs tracking-widest">
-                    <p>© {new Date().getFullYear()} ULTRAVIOLET. ALL RIGHTS RESERVED.</p>
-                    <p className="mt-4 md:mt-0 italic font-mono uppercase">Secure LLM & Confidential AI Platform</p>
+                <div className="mt-12 pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-4 text-muted-foreground">
+                    <p>&copy; {new Date().getFullYear()} Ultraviolet. All rights reserved.</p>
+                    <div className="flex gap-6">
+                        <Link href="/imprint" className="hover:text-primary">Imprint</Link>
+                        <Link href="/terms" className="hover:text-primary">Terms of Service</Link>
+                        <Link href="/privacy" className="hover:text-primary">Privacy Policy</Link>
+                    </div>
                 </div>
             </div>
         </footer>
