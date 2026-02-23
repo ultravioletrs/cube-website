@@ -2,6 +2,7 @@ import { source } from '@/lib/source';
 import { DocsBody, DocsDescription, DocsPage, DocsTitle } from 'fumadocs-ui/layouts/docs/page';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import defaultMdxComponents from 'fumadocs-ui/mdx';
 
 export default async function Page(props: {
     params: Promise<{ slug?: string[] }>;
@@ -18,14 +19,14 @@ export default async function Page(props: {
             <DocsTitle>{page.data.title}</DocsTitle>
             <DocsDescription>{page.data.description}</DocsDescription>
             <DocsBody>
-                <MDX />
+                <MDX components={{ ...defaultMdxComponents }} />
             </DocsBody>
         </DocsPage>
     );
 }
 
 export async function generateStaticParams() {
-    return source.generateParams();
+    return source.generateParams().filter((p) => p.slug && p.slug.length > 0);
 }
 
 export async function generateMetadata(props: {

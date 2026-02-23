@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 const Gateway = () => {
     return (
-        <section id="gateway" className="py-24 bg-neutral-50 overflow-hidden">
+        <section id="enterprise" className="py-24 bg-neutral-50 overflow-hidden">
             <div className="container mx-auto px-4 md:px-6">
                 {/* Deploy Any LLM Section */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-32">

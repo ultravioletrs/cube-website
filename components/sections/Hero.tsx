@@ -12,7 +12,7 @@ const Hero = () => {
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-secondary/20 via-white to-white pointer-events-none" />
 
             {/* Main Hero Content */}
-            <div className="container mx-auto px-4 md:px-6 py-12 lg:py-20">
+            <div className="container mx-auto px-4 md:px-6 py-16 lg:py-24">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
@@ -22,17 +22,17 @@ const Hero = () => {
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-black mb-6 leading-tight">
                             Confidential AI for <br /><span className="text-neutral-500">The Enterprise</span>
                         </h1>
-                        <div className="space-y-6 text-xl text-neutral-600 leading-relaxed">
+                        <div className="space-y-8 text-xl md:text-2xl text-neutral-600 leading-relaxed">
                             <p>
                                 The definitive open-source framework for securing
                                 Large Language Models in mission-critical environments.
                             </p>
-                            <p className="text-lg">
+                            <p className="text-xl">
                                 Secure your most sensitive data with hardware-isolated Trusted Execution Environments (TEEs)—sfecharging models from unauthorized access, even from cloud providers.
                             </p>
                         </div>
 
-                        <div className="mt-10 flex flex-wrap gap-4">
+                        <div className="mt-12 flex flex-wrap gap-6">
                             <a
                                 href="mailto:info@ultraviolet.rs"
                                 className="px-8 py-4 bg-black text-white rounded-full font-bold hover:bg-neutral-800 transition-all shadow-lg hover:shadow-xl"

@@ -5,9 +5,9 @@ import Image from "next/image";
 
 const Footer = () => {
     return (
-        <footer className="bg-muted/50 border-t py-12 text-sm">
+        <footer className="bg-muted/50 border-t py-16 text-base">
             <div className="container mx-auto px-4 md:px-6">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
                     <div className="md:col-span-1">
                         <Link href="https://www.ultraviolet.rs/" target="_blank" rel="noopener noreferrer" className="inline-block mb-4">
                             <Image
@@ -24,7 +24,7 @@ const Footer = () => {
                     </div>
 
                     <div>
-                        <h3 className="font-bold text-lg mb-4">Product</h3>
+                        <h3 className="font-bold text-xl mb-4">Product</h3>
                         <ul className="space-y-2">
                             <li><Link href="/docs" className="text-muted-foreground hover:text-primary">Cube AI Documentation</Link></li>
                             <li><a href="https://docs.google.com/presentation/d/1UJR6HKiBV3r56SyMNZvO3ylek8VFmNojbFkTC-bawBY/export/pdf" className="text-muted-foreground hover:text-primary">Cube AI Datasheet</a></li>
@@ -32,7 +32,7 @@ const Footer = () => {
                     </div>
 
                     <div>
-                        <h3 className="font-bold text-lg mb-4">Connect</h3>
+                        <h3 className="font-bold text-xl mb-4">Connect</h3>
                         <ul className="space-y-2">
                             <li><Link href="https://twitter.com/ultravioletrs" target="_blank" className="text-muted-foreground hover:text-primary">Twitter</Link></li>
                             <li><Link href="https://linkedin.com/company/ultravioletrs" target="_blank" className="text-muted-foreground hover:text-primary">LinkedIn</Link></li>
@@ -42,7 +42,7 @@ const Footer = () => {
                     </div>
 
                     <div>
-                        <h3 className="font-bold text-lg mb-4">Newsletter</h3>
+                        <h3 className="font-bold text-xl mb-4">Newsletter</h3>
                         <p className="text-muted-foreground mb-4">
                             Stay updated with our latest developments.
                         </p>

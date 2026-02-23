@@ -5,14 +5,10 @@
         "ui/ui-overview",
         "architecture",
         "guardrails",
-        "---Platform Internals---",
         "vllm",
         "attestation",
-        "---API---",
         "api",
-        "---Integrations---",
         "integrations",
-        "---Developer Guide---",
         "developer-guide"
     ]
 }

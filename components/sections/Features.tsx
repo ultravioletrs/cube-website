@@ -39,7 +39,7 @@ const features = [
     {
         title: "Secure Infrastructure",
         description: "Hardware-isolated Trusted Execution Environments (TEEs) protect data during execution.",
-        image: "/img/ui/domains.png",
+        image: "/img/cube-architecture.png",
         icon: Globe,
         className: "md:col-span-2 lg:col-span-2",
     },
@@ -47,18 +47,18 @@ const features = [
 
 const Features = () => {
     return (
-        <section id="features" className="py-24 bg-white">
+        <section id="architecture" className="py-32 bg-white">
             <div className="container mx-auto px-4 md:px-6">
-                <div className="text-center max-w-3xl mx-auto mb-16">
+                <div className="text-center max-w-3xl mx-auto mb-20">
                     <h2 className="text-3xl md:text-5xl font-black text-black mb-4 uppercase tracking-tight">
                         Built for <span className="text-neutral-500">Security</span>
                     </h2>
-                    <p className="text-neutral-600 text-lg font-medium">
+                    <p className="text-neutral-600 text-xl font-medium">
                         Powerful features designed to keep your AI workloads private and compliant.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
                     {features.map((feature, index) => (
                         <motion.div
                             key={feature.title}
@@ -75,26 +75,28 @@ const Features = () => {
                                     </div>
                                     <h3 className="text-xl font-bold text-black">{feature.title}</h3>
                                 </div>
-                                <p className="text-neutral-500 text-sm leading-relaxed mb-6 max-w-md">
+                                <p className="text-neutral-500 text-base md:text-lg leading-relaxed mb-6 max-w-md">
                                     {feature.description}
                                 </p>
                             </div>
 
-                            <div className="relative mt-auto px-8 overflow-hidden h-48 md:h-64">
+                            <div className="relative mt-auto px-8 pb-8 overflow-hidden h-64 md:h-80">
                                 <div className="absolute inset-0 bg-gradient-to-t from-neutral-50 via-transparent to-transparent z-10" />
-                                <Image
-                                    src={feature.image}
-                                    alt={feature.title}
-                                    fill
-                                    className="object-cover object-top rounded-t-xl border-x border-t border-neutral-200 group-hover:scale-105 transition-transform duration-500"
-                                />
+                                <div className="relative w-full h-full rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-sm">
+                                    <Image
+                                        src={feature.image}
+                                        alt={feature.title}
+                                        fill
+                                        className="object-contain object-center p-4 group-hover:scale-105 transition-transform duration-500"
+                                    />
+                                </div>
                             </div>
                         </motion.div>
                     ))}
                 </div>
 
                 {/* Secondary Features Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
                     {[
                         { title: "Fine-grained RBAC", icon: Users, desc: "Robust role-based access control for teams." },
                         { title: "Remote Attestation", icon: Shield, desc: "Verify execution environment integrity." },
@@ -110,8 +112,8 @@ const Features = () => {
                             className="p-6 rounded-2xl border border-neutral-100 hover:bg-neutral-50 transition-colors"
                         >
                             <item.icon className="w-6 h-6 text-yellow-500 mb-3" />
-                            <h4 className="font-bold text-black mb-1">{item.title}</h4>
-                            <p className="text-neutral-500 text-xs">{item.desc}</p>
+                            <h4 className="font-bold text-black mb-1 text-lg">{item.title}</h4>
+                            <p className="text-neutral-500 text-sm">{item.desc}</p>
                         </motion.div>
                     ))}
                 </div>
