@@ -44,7 +44,7 @@ const Gateway = () => {
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
-                        className="order-1 lg:order-2 bg-background rounded-3xl p-8 border border-border shadow-sm"
+                        className="order-1 lg:order-2 bg-background rounded-3xl p-8 shadow-sm"
                     >
                         <Image
                             src="/img/ollama.png"
@@ -63,7 +63,7 @@ const Gateway = () => {
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
-                        className="bg-background rounded-3xl p-8 border border-border shadow-sm"
+                        className="bg-background rounded-3xl p-8 shadow-sm"
                     >
                         <Image
                             src="/img/ai-gateway.png"

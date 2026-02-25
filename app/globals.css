@@ -44,8 +44,8 @@
 }
 
 body {
-  color: hsl(var(--foreground));
-  background: hsl(var(--background));
+  color: var(--foreground);
+  background: var(--background);
   font-family: var(--font-sans);
 }
 
@@ -73,4 +73,12 @@ h6 {
 
 #nd-page {
   max-width: none;
+}
+
+/* Match original Navbar height on fumadocs HomeLayout topnav */
+/* fumadocs hardcodes h-14 on both the header and inner nav, override both */
+#nd-nav,
+#nd-nav>div,
+#nd-nav nav {
+  height: 5rem;
 }
