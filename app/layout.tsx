@@ -36,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body
-        className={`${robotoMono.variable} antialiased bg-background font-sans`}
+        className={`${robotoMono.className} antialiased bg-background font-sans`}
       >
         <RootProvider>
           {children}
