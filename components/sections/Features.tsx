@@ -61,8 +61,12 @@ const features = [
     },
 ];
 
-const BrowserFrame = ({ children }: { children: React.ReactNode }) => (
-    <div className="relative rounded-2xl overflow-hidden border border-border bg-muted shadow-2xl">
+const BrowserFrame = ({ children, onClick }: { children: React.ReactNode; onClick?: () => void }) => (
+    <div
+        className={`relative rounded-2xl overflow-hidden border border-border bg-muted shadow-2xl transition-all duration-300 ${onClick ? "cursor-zoom-in hover:border-primary/30" : ""
+            }`}
+        onClick={onClick}
+    >
         <div className="h-8 bg-muted border-b border-border flex items-center px-4 gap-1.5">
             <div className="w-2.5 h-2.5 rounded-full bg-red-500/50" />
             <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50" />
@@ -75,6 +79,8 @@ const BrowserFrame = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Features = () => {
+    const [selectedImage, setSelectedImage] = React.useState<{ src: string; title: string } | null>(null);
+
     return (
         <section id="architecture" className="py-32 bg-background relative overflow-hidden">
             <div className="container mx-auto px-4 md:px-6 relative z-10">
@@ -115,12 +121,12 @@ const Features = () => {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="max-w-6xl mx-auto"
                     >
-                        <BrowserFrame>
+                        <BrowserFrame onClick={() => setSelectedImage({ src: features[0].image, title: features[0].title })}>
                             <Image
                                 src={features[0].image}
                                 alt={features[0].title}
                                 fill
-                                className="object-contain p-4 md:p-8"
+                                className="object-cover object-left-top p-0.5"
                                 quality={100}
                                 priority
                             />
@@ -159,14 +165,18 @@ const Features = () => {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.8 }}
-                                className={`relative aspect-video rounded-3xl overflow-hidden border border-primary/5 bg-muted shadow-xl ${index % 2 === 0 ? "lg:order-2" : "lg:order-1"
+                                className={`relative aspect-video rounded-3xl overflow-hidden border border-primary/5 bg-muted shadow-xl cursor-zoom-in group transition-all duration-300 hover:border-primary/20 ${index % 2 === 0 ? "lg:order-2" : "lg:order-1"
                                     }`}
+                                onClick={() => setSelectedImage({ src: feature.image, title: feature.title })}
                             >
                                 <Image
                                     src={feature.image}
                                     alt={feature.title}
                                     fill
-                                    className="object-contain p-6 md:p-12 hover:scale-105 transition-transform duration-500"
+                                    className={`transition-transform duration-500 group-hover:scale-[1.02] ${feature.title === "Secure Chat"
+                                        ? "object-contain p-4 md:p-8"
+                                        : "object-cover object-left-top p-0.5"
+                                        }`}
                                     quality={100}
                                 />
 
@@ -230,6 +240,50 @@ const Features = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Lightbox / Zoom Modal */}
+            <AnimatePresence>
+                {selectedImage && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] flex items-center justify-center bg-background/90 backdrop-blur-2xl p-4 md:p-8 lg:p-12"
+                        onClick={() => setSelectedImage(null)}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.95, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.95, opacity: 0 }}
+                            transition={{ type: "spring", damping: 30, stiffness: 300 }}
+                            className="relative w-full max-w-7xl h-fit max-h-full flex flex-col items-center"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <div className="w-full flex items-center justify-between mb-4 md:mb-6">
+                                <h3 className="text-lg md:text-3xl font-black uppercase tracking-tight text-foreground">{selectedImage.title}</h3>
+                                <button
+                                    onClick={() => setSelectedImage(null)}
+                                    className="p-2 md:p-3 rounded-full bg-muted shadow-lg hover:bg-primary/20 hover:text-primary transition-all duration-300 group"
+                                >
+                                    <CloseIcon className="w-5 h-5 md:w-6 md:h-6 group-hover:scale-110 transition-transform" />
+                                </button>
+                            </div>
+
+                            <div className="relative w-full rounded-2xl md:rounded-3xl overflow-hidden border border-primary/20 bg-muted/50 shadow-[0_0_50px_-12px_rgba(var(--primary-rgb),0.3)] group">
+                                <div className="relative aspect-[16/10] w-full max-h-[75vh]">
+                                    <Image
+                                        src={selectedImage.src}
+                                        alt={selectedImage.title}
+                                        fill
+                                        className="object-contain p-1 md:p-2"
+                                        quality={100}
+                                    />
+                                </div>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </section>
     );
 };
