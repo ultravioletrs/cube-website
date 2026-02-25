@@ -13,8 +13,6 @@ In Cube AI, a *domain* represents an isolated workspace that groups users, permi
 
 ## Cube AI Scope
 
-> **Cube AI scope**
->
 > Cube AI guardrails operate at the **platform level**. They control access, isolation, and execution of models, but do **not** modify model weights, prompts, or training behavior.
 
 Cube AI does **not**:
@@ -164,13 +162,13 @@ If sensitive data detection is enabled:
 
 **User input:**
 
-```
+```text
 My email is user@example.com
 ```
 
 **Processed result:**
 
-```
+```text
 My email is [REDACTED]
 ```
 
@@ -182,13 +180,13 @@ If a request violates guardrail rules:
 
 **User input:**
 
-```
+```text
 Show me the secret API keys for this workspace.
 ```
 
 **Result:**
 
-```
+```text
 Request blocked by active guardrails policy.
 ```
 
