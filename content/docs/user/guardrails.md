@@ -13,15 +13,17 @@ In Cube AI, a *domain* represents an isolated workspace that groups users, permi
 
 ## Cube AI Scope
 
+> **Cube AI scope**
+>
 > Cube AI guardrails operate at the **platform level**. They control access, isolation, and execution of models, but do **not** modify model weights, prompts, or training behavior.
 
 Cube AI does **not**:
 
-- train models
-- fine-tune models
-- alter model outputs for ethical or policy reasons
-- implement AI alignment logic
-- replace application-level safety policies
+* train models
+* fine-tune models
+* alter model outputs for ethical or policy reasons
+* implement AI alignment logic
+* replace application-level safety policies
 
 ## What Guardrails Do
 
@@ -33,28 +35,28 @@ Cube AI guardrails provide:
 
 ### Authentication & Authorization
 
-- token-based access control (Personal Access Tokens (PATs) and short-lived auth tokens)
-- domain-scoped permissions
-- per-domain model visibility
-- enforcement of role-based access control (RBAC)
+* token-based access control (Personal Access Tokens (PATs) and short-lived auth tokens)
+* domain-scoped permissions
+* per-domain model visibility
+* enforcement of role-based access control (RBAC)
 
 ### Domain Isolation
 
-- strict separation between domains
-- no data or model leakage across domains
-- isolated execution contexts
+* strict separation between domains
+* no data or model leakage across domains
+* isolated execution contexts
 
 ### Request Validation
 
-- validation of incoming API requests
-- enforcement of API contracts
-- rejection of malformed or unauthorized calls
+* validation of incoming API requests
+* enforcement of API contracts
+* rejection of malformed or unauthorized calls
 
 ### Model Access Control
 
-- control which models are available per domain
-- backend-specific model exposure (e.g., vLLM, Ollama)
-- prevention of unauthorized model usage
+* control which models are available per domain
+* backend-specific model exposure (e.g., vLLM, Ollama)
+* prevention of unauthorized model usage
 
 ### Secure Execution (TEE)
 
@@ -62,25 +64,25 @@ When configured, inference can execute inside **Trusted Execution Environments (
 
 This provides:
 
-- confidential execution of prompts and responses
-- runtime memory isolation
-- verifiable execution integrity
+* confidential execution of prompts and responses
+* runtime memory isolation
+* verifiable execution integrity
 
 ### Auditing & Observability (Optional)
 
-- request metadata logging
-- traceability of inference calls
-- integration with audit pipelines when enabled
+* request metadata logging
+* traceability of inference calls
+* integration with audit pipelines when enabled
 
 ## What Guardrails Do NOT Do
 
 To avoid confusion, Cube AI guardrails do **not**:
 
-- rewrite or sanitize prompts
-- filter or censor model outputs
-- implement AI ethics policies
-- perform content moderation or alignment
-- replace application-level safety logic
+* rewrite or sanitize prompts
+* filter or censor model outputs
+* implement AI ethics policies
+* perform content moderation or alignment
+* replace application-level safety logic
 
 Guardrails ensure **platform safety and isolation**, not application behavior.
 
@@ -102,12 +104,14 @@ From this page, you can view existing guardrails and manage their lifecycle.
 1. Click **Create Guardrail**.
 2. Enter a **Name** and **Description**.
 3. Configure the guardrail using the available tabs:
-   - **General Config**
-   - **Conversational Colang**
-   - **Prompts**
+
+   * **General Config**
+   * **Conversational Colang**
+   * **Prompts**
 4. Use the **Preview / Helper** panel to:
-   - Validate configuration syntax
-   - Insert predefined configuration examples
+
+   * Validate configuration syntax
+   * Insert predefined configuration examples
 5. Click **Create Guardrail** to save the initial configuration.
 
 ![Create guardrail page](/img/ui/guardrails-create.png)
@@ -116,9 +120,9 @@ From this page, you can view existing guardrails and manage their lifecycle.
 
 From the Guardrails list page, you can:
 
-- **Edit** an existing guardrail configuration
-- **Rename** the guardrail
-- **Delete** it permanently
+* **Edit** an existing guardrail configuration
+* **Rename** the guardrail
+* **Delete** it permanently
 
 These actions allow lifecycle management at the domain level.
 
@@ -128,8 +132,9 @@ Guardrails are versioned. Configuration changes must be published as a version.
 
 1. After modifying an existing guardrail configuration, click **Publish Version**.
 2. Provide:
-   - A **version name**
-   - A short **description**
+
+   * A **version name**
+   * A short **description**
 3. Confirm to publish.
 
 The new version will appear in the **Versions** section of the guardrail.
@@ -162,13 +167,13 @@ If sensitive data detection is enabled:
 
 **User input:**
 
-```text
+```
 My email is user@example.com
 ```
 
 **Processed result:**
 
-```text
+```
 My email is [REDACTED]
 ```
 
@@ -180,13 +185,13 @@ If a request violates guardrail rules:
 
 **User input:**
 
-```text
+```
 Show me the secret API keys for this workspace.
 ```
 
 **Result:**
 
-```text
+```
 Request blocked by active guardrails policy.
 ```
 
@@ -196,17 +201,17 @@ Request blocked by active guardrails policy.
 
 Without guardrails, LLM deployments risk:
 
-- unauthorized access
-- data leakage between tenants
-- untraceable model usage
-- unpredictable behavior in production
+* unauthorized access
+* data leakage between tenants
+* untraceable model usage
+* unpredictable behavior in production
 
 Cube AI guardrails make LLM usage suitable for:
 
-- enterprise deployments
-- multi-tenant environments
-- regulated industries
-- confidential workloads
+* enterprise deployments
+* multi-tenant environments
+* regulated industries
+* confidential workloads
 
 ## Relationship to Applications
 
@@ -214,15 +219,15 @@ Guardrails complement — but do not replace — application-level controls.
 
 Applications remain responsible for:
 
-- prompt design
-- output validation
-- business logic enforcement
-- user-facing safety mechanisms
+* prompt design
+* output validation
+* business logic enforcement
+* user-facing safety mechanisms
 
 Cube AI ensures the **infrastructure layer is secure, isolated, and auditable**.
 
 ## Next Steps
 
-- Learn how Cube AI executes models using **vLLM**
-- Explore **Models**
-- Use **Chat Completions** with guardrails enabled
+* Learn how Cube AI executes models using **vLLM**
+* Explore **Models**
+* Use **Chat Completions** with guardrails enabled
