@@ -4,8 +4,11 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import DemoRequestModal from "@/components/DemoRequestModal";
 
 const Hero = () => {
+    const [isDemoModalOpen, setIsDemoModalOpen] = React.useState(false);
+
     return (
         <section className="relative overflow-hidden bg-background">
             {/* Background Gradient */}
@@ -33,18 +36,18 @@ const Hero = () => {
                         </div>
 
                         <div className="mt-12 flex flex-wrap gap-6">
+                            <button
+                                onClick={() => setIsDemoModalOpen(true)}
+                                className="px-8 py-4 bg-primary text-primary-foreground rounded-full font-bold hover:opacity-90 transition-all shadow-lg hover:shadow-xl cursor-pointer"
+                            >
+                                View Live Demo
+                            </button>
                             <a
                                 href="mailto:info@ultraviolet.rs"
-                                className="px-8 py-4 bg-primary text-primary-foreground rounded-full font-bold hover:opacity-90 transition-all shadow-lg hover:shadow-xl"
+                                className="px-8 py-4 bg-background text-foreground border-2 border-border rounded-full font-bold hover:border-foreground transition-all"
                             >
                                 Talk to Sales
                             </a>
-                            <Link
-                                href="/docs"
-                                className="px-8 py-4 bg-background text-foreground border-2 border-border rounded-full font-bold hover:border-foreground transition-all"
-                            >
-                                Documentation
-                            </Link>
                         </div>
                     </motion.div>
 
@@ -66,6 +69,11 @@ const Hero = () => {
                     </motion.div>
                 </div>
             </div>
+
+            <DemoRequestModal
+                isOpen={isDemoModalOpen}
+                onClose={() => setIsDemoModalOpen(false)}
+            />
         </section>
     );
 };
