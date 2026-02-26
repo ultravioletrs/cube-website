@@ -2,7 +2,11 @@
     "pages": [
         "index",
         "getting-started",
-        "ui/ui-overview",
+        "ui/overview",
+        "ui/domains",
+        "ui/user-actions",
+        "security/roles-and-access-control",
+        "security/audit-logs",
         "architecture",
         "guardrails",
         "vllm",
