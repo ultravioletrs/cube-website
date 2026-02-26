@@ -6,10 +6,12 @@ import { Menu, X, Github } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import BrandLogo from "@/components/BrandLogo";
+import DemoRequestModal from "@/components/DemoRequestModal";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -61,6 +63,12 @@ const Navbar = () => {
                         >
                             <Github className="w-5 h-5" />
                         </Link>
+                        <button
+                            onClick={() => setIsDemoModalOpen(true)}
+                            className="px-6 py-2.5 bg-primary text-primary-foreground rounded-full text-sm font-bold hover:opacity-90 transition-all shadow-md cursor-pointer"
+                        >
+                            Request Demo
+                        </button>
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -94,7 +102,16 @@ const Navbar = () => {
                                     </Link>
                                 </div>
                             ))}
-                            <div className="pt-4 border-t border-neutral-100">
+                            <div className="pt-4 flex flex-col gap-4 border-t border-neutral-100">
+                                <button
+                                    onClick={() => {
+                                        setIsOpen(false);
+                                        setIsDemoModalOpen(true);
+                                    }}
+                                    className="w-full py-3 bg-primary text-primary-foreground rounded-full text-sm font-bold hover:opacity-90 transition-all shadow-md"
+                                >
+                                    Request Demo
+                                </button>
                                 <Link
                                     href="https://github.com/ultravioletrs/cube"
                                     target="_blank"
@@ -108,6 +125,10 @@ const Navbar = () => {
                     </motion.div>
                 )}
             </AnimatePresence>
+            <DemoRequestModal
+                isOpen={isDemoModalOpen}
+                onClose={() => setIsDemoModalOpen(false)}
+            />
         </nav>
     );
 };
