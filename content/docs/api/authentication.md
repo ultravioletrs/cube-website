@@ -4,22 +4,24 @@ title: Authentication
 sidebar_position: 2
 ---
 
-Cube AI uses **token-based authentication** with **Personal Access Tokens (PATs)**.
+Cube AI uses **token-based authentication**.
 
-All API requests must be authenticated using a valid PAT.  
-Authentication is **required** before interacting with any Cube AI API endpoint.
+Authentication is required before interacting with any Cube AI API endpoint.
 
 ---
 
 ## Overview
 
-Cube AI authentication is based on **long-lived Personal Access Tokens (PATs)**:
+Cube AI supports two token types:
 
-- PATs are issued to a **user**
-- PATs are used for **all API access, integrations, and development workflows**
-- API access is **scoped by domain**, not by the token itself
+- **Personal Access Tokens (PATs)** – long-lived tokens created by users
+- **Short-lived auth tokens (JWTs)** – issued during UI login sessions
 
-This approach avoids frequent re-authentication and is recommended for all external usage.
+For all documented API usage, integrations, CLI tools, and external access,
+**Personal Access Tokens (PATs) are the recommended and officially supported mechanism**.
+
+Short-lived auth tokens are primarily used by the Cube AI UI and may also
+be used in authenticated session-based flows.
 
 ---
 
@@ -32,7 +34,7 @@ This approach avoids frequent re-authentication and is recommended for all exter
 - IDE integrations (Continue, OpenCode, etc.)
 - Automation and scripts
 
-PATs replace short-lived access tokens for all documented API usage.
+PATs are the recommended mechanism for all documented API usage.
 
 ---
 
@@ -61,7 +63,8 @@ Authorization: Bearer <pat>
 Example:
 
 ```bash
-curl -k https://<cube-ai-instance>/users   -H "Authorization: Bearer <pat>"
+curl -k https://<cube-ai-instance>/users \
+  -H "Authorization: Bearer <pat>"
 ```
 
 ---
@@ -79,7 +82,8 @@ All OpenAI-compatible API requests must be sent to:
 Example:
 
 ```bash
-curl -k https://<cube-ai-instance>/proxy/<domain_id>/v1/models   -H "Authorization: Bearer <pat>"
+curl -k https://<cube-ai-instance>/proxy/<domain_id>/v1/models \
+  -H "Authorization: Bearer <pat>"
 ```
 
 The domain determines:
@@ -103,15 +107,16 @@ The domain determines:
 
 ---
 
-## Short-Lived Access Tokens (UI Only)
+## Short-Lived Access Tokens
 
 Cube AI may issue **short-lived JWT access tokens** internally for UI login sessions.
 
 These tokens:
 
 - Are managed automatically by the UI
-- Are **not intended for direct API usage**
-- Are **not documented** for external integrations
+- Are primarily used for session-based authentication
+- May be used in authenticated flows
+- Are not the recommended mechanism for external API integrations
 
 All documentation examples use **Personal Access Tokens (PATs)**.
 
@@ -119,8 +124,9 @@ All documentation examples use **Personal Access Tokens (PATs)**.
 
 ## Summary
 
-- Cube AI uses **Personal Access Tokens (PATs)** for authentication
-- PATs are created via the Cube AI UI
-- All API calls require `Authorization: Bearer <pat>`
+- Cube AI uses **token-based authentication**
+- Two token types exist: **PATs** and **short-lived auth tokens**
+- **PATs are recommended for all documented API usage**
+- All API calls require `Authorization: Bearer <token>`
 - Model APIs are accessed via the **domain proxy**
-- Domain isolation and PAT-based access are core security features of Cube AI
+- Domain isolation and token-based access are core security features of Cube AI
