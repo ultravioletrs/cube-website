@@ -11,8 +11,10 @@ import {
     Database,
     Globe,
     ShieldAlert,
+    ArrowUpRight,
     X as CloseIcon
 } from "lucide-react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
 const features = [
@@ -22,6 +24,7 @@ const features = [
         image: "/img/ui/domain-overview.png",
         icon: Globe,
         className: "md:col-span-2 lg:col-span-2",
+        docsLink: "/docs/ui/overview",
     },
     {
         title: "Platform Gateways",
@@ -29,6 +32,7 @@ const features = [
         image: "/img/ui/routes.png",
         icon: Zap,
         className: "md:col-span-1 lg:col-span-1",
+        docsLink: "/docs/ui/domains",
     },
     {
         title: "Security Guardrails",
@@ -36,6 +40,7 @@ const features = [
         image: "/img/ui/guardrails.png",
         icon: ShieldAlert,
         className: "md:col-span-1 lg:col-span-1",
+        docsLink: "/docs/guardrails",
     },
     {
         title: "Model Management",
@@ -43,6 +48,7 @@ const features = [
         image: "/img/ui/models.png",
         icon: Database,
         className: "md:col-span-2 lg:col-span-2",
+        docsLink: "/docs/vllm",
     },
     {
         title: "Audit & Compliance",
@@ -50,6 +56,7 @@ const features = [
         image: "/img/ui/audit-logs.png",
         icon: Users,
         className: "md:col-span-2 lg:col-span-2",
+        docsLink: "/docs/security/audit-logs",
     },
     {
         title: "Secure Chat",
@@ -57,6 +64,7 @@ const features = [
         image: "/img/chat-ui.png",
         icon: MessageSquare,
         className: "md:col-span-1 lg:col-span-1",
+        docsLink: "/docs/attestation",
     },
 ];
 
@@ -108,9 +116,16 @@ const Features = () => {
                         <h3 className="text-3xl md:text-5xl font-black text-foreground mb-6 uppercase tracking-tight">
                             {features[0].title}
                         </h3>
-                        <p className="text-muted-foreground text-lg md:text-xl font-medium leading-relaxed max-w-2xl mx-auto">
+                        <p className="text-muted-foreground text-lg md:text-xl font-medium leading-relaxed max-w-2xl mx-auto mb-8">
                             {features[0].description}
                         </p>
+                        <Link
+                            href={features[0].docsLink}
+                            className="inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all group"
+                        >
+                            <span>Explore Documentation</span>
+                            <ArrowUpRight className="w-5 h-5 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+                        </Link>
                     </motion.div>
 
                     <motion.div
@@ -154,9 +169,16 @@ const Features = () => {
                                 <h3 className="text-2xl md:text-4xl font-black text-foreground mb-6 uppercase tracking-tight">
                                     {feature.title}
                                 </h3>
-                                <p className="text-muted-foreground text-lg md:text-xl font-medium leading-relaxed">
+                                <p className="text-muted-foreground text-lg md:text-xl font-medium leading-relaxed mb-8">
                                     {feature.description}
                                 </p>
+                                <Link
+                                    href={feature.docsLink!}
+                                    className="inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all group"
+                                >
+                                    <span>Learn More</span>
+                                    <ArrowUpRight className="w-5 h-5 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+                                </Link>
                             </motion.div>
 
                             <motion.div
