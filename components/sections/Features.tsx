@@ -11,7 +11,6 @@ import {
     Database,
     Globe,
     ShieldAlert,
-    Maximize2,
     X as CloseIcon
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -173,10 +172,7 @@ const Features = () => {
                                     src={feature.image}
                                     alt={feature.title}
                                     fill
-                                    className={`transition-transform duration-500 group-hover:scale-[1.02] ${feature.title === "Secure Chat"
-                                        ? "object-contain p-4 md:p-8"
-                                        : "object-cover object-left-top p-0.5"
-                                        }`}
+                                    className="transition-transform duration-500 group-hover:scale-[1.02] object-cover object-left-top p-0.5"
                                     quality={100}
                                 />
 
