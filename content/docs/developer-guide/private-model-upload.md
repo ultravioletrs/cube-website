@@ -38,7 +38,7 @@ The Buildroot HAL supports embedding custom model configuration directly into th
 
 During HAL image configuration (see [HAL guide](/developer-guide/hal)), navigate to:
 
-**Target packages → Cube packages → ollama**
+Path: `Target packages → Cube packages → ollama`
 
 Set the **Custom models to install** field with a space-separated list of Ollama model tags:
 
@@ -46,7 +46,7 @@ Set the **Custom models to install** field with a space-separated list of Ollama
 llama2:7b mistral:7b codellama:13b
 ```
 
-These models are pulled automatically on first boot by a script installed at `/usr/libexec/ollama/pull-models.sh`. 
+These models are pulled automatically on first boot by a script installed at `/usr/libexec/ollama/pull-models.sh`.
 
 Or set it directly in the Buildroot defconfig:
 
