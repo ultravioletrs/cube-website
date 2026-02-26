@@ -33,10 +33,10 @@ Cube AI guardrails provide:
 
 ### Authentication & Authorization
 
-* token-based access control (Personal Access Tokens (PATs) and short-lived auth tokens)
-* domain-scoped permissions
-* per-domain model visibility
-* enforcement of role-based access control (RBAC)
+- token-based access control (Personal Access Tokens (PATs) and short-lived auth tokens)
+- domain-scoped permissions
+- per-domain model visibility
+- enforcement of role-based access control (RBAC)
 
 ### Domain Isolation
 
