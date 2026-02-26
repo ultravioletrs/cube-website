@@ -20,10 +20,10 @@ const Navbar = () => {
     }, []);
 
     const navLinks = [
+        { name: "FEATURES", href: "#architecture" },
         { name: "SOLUTIONS", href: "#solutions" },
-        { name: "ARCHITECTURE", href: "#architecture" },
-        { name: "DOCUMENTATION", href: "/docs" },
         { name: "ENTERPRISE", href: "#enterprise" },
+        { name: "DOCUMENTATION", href: "/docs" },
         { name: "CONTACT", href: "mailto:info@ultraviolet.rs" },
     ];
 

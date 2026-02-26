@@ -7,9 +7,9 @@ import { motion } from "framer-motion";
 
 const Hero = () => {
     return (
-        <section className="relative overflow-hidden bg-white">
+        <section className="relative overflow-hidden bg-background">
             {/* Background Gradient */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-secondary/20 via-white to-white pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background pointer-events-none" />
 
             {/* Main Hero Content */}
             <div className="container mx-auto px-4 md:px-6 py-16 lg:py-24">
@@ -19,29 +19,29 @@ const Hero = () => {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                     >
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-black mb-6 leading-tight">
-                            Confidential AI for <br /><span className="text-neutral-500">The Enterprise</span>
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground mb-6 leading-tight">
+                            Confidential AI for <br /><span className="text-muted-foreground">The Enterprise</span>
                         </h1>
-                        <div className="space-y-8 text-xl md:text-2xl text-neutral-600 leading-relaxed">
+                        <div className="space-y-8 text-xl md:text-2xl text-foreground font-medium opacity-80 leading-relaxed">
                             <p>
                                 The definitive open-source framework for securing
                                 Large Language Models in mission-critical environments.
                             </p>
                             <p className="text-xl">
-                                Secure your most sensitive data with hardware-isolated Trusted Execution Environments (TEEs)—sfecharging models from unauthorized access, even from cloud providers.
+                                Secure your most sensitive data with hardware-isolated Trusted Execution Environments (TEEs)—safe guarding models from unauthorized access, even from cloud providers.
                             </p>
                         </div>
 
                         <div className="mt-12 flex flex-wrap gap-6">
                             <a
                                 href="mailto:info@ultraviolet.rs"
-                                className="px-8 py-4 bg-black text-white rounded-full font-bold hover:bg-neutral-800 transition-all shadow-lg hover:shadow-xl"
+                                className="px-8 py-4 bg-primary text-primary-foreground rounded-full font-bold hover:opacity-90 transition-all shadow-lg hover:shadow-xl"
                             >
                                 Talk to Sales
                             </a>
                             <Link
                                 href="/docs"
-                                className="px-8 py-4 bg-white text-black border-2 border-neutral-200 rounded-full font-bold hover:border-black transition-all"
+                                className="px-8 py-4 bg-background text-foreground border-2 border-border rounded-full font-bold hover:border-foreground transition-all"
                             >
                                 Documentation
                             </Link>
@@ -55,11 +55,11 @@ const Hero = () => {
                         className="relative"
                     >
                         <Image
-                            src="/img/cube-ai.png"
-                            alt="Cube AI Concept"
-                            width={600}
-                            height={600}
-                            className="w-full h-auto drop-shadow-2xl"
+                            src="/img/cube-ai-hero.png"
+                            alt="Cube AI - Confidential Computing Enclave"
+                            width={800}
+                            height={800}
+                            className="w-full h-auto drop-shadow-2xl rounded-2xl"
                         />
                         {/* Subtle glow effect */}
                         <div className="absolute -inset-4 bg-yellow-400/20 blur-3xl opacity-20 -z-10 rounded-full" />
