@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Cpu, Code, Shield, Globe } from "lucide-react";
+import { ArrowUpRight, Cpu, Code, Shield } from "lucide-react";
 
 const integrations = [
     {
@@ -48,7 +48,7 @@ const Integrations = () => {
                         Built for <span className="text-primary">Integrations</span>
                     </h2>
                     <p className="text-muted-foreground text-xl md:text-2xl font-medium leading-relaxed">
-                        Connect your favorite tools to Cube AI's secure infrastructure and start building confidential AI applications today.
+                        Connect your favorite tools to Cube AI&apos;s secure infrastructure and start building confidential AI applications today.
                     </p>
                 </header>
 
