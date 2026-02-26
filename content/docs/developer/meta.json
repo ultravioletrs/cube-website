@@ -1,0 +1,13 @@
+{
+  "title": "Developer",
+  "pages": [
+    "architecture",
+    "attestation",
+    "platform",
+    "api",
+    "integrations",
+    "guide",
+    "auth",
+    "notebooks"
+  ]
+}

@@ -199,7 +199,7 @@ Once the model is exported in GGUF format, upload it to Cube AI for inference.
 
 Refer to the **Private Model Upload** guide for detailed instructions:
 
-👉 `docs/developer-guide/private-model-upload.md`
+👉 `content/docs/developer/guide/private-model-upload.md`
 
 After uploading, the model becomes available for selection in the Cube AI Chat UI and inference APIs.
 

@@ -340,6 +340,6 @@ CHECK_INTERVAL=60  # Check every 60 seconds
 
 After starting your CVM, continue with these follow-on guides to configure services and validate functionality:
 
-- [Configure the Cube Agent](/developer-guide/hal)
-- [Upload Private Models](/developer-guide/private-model-upload)
-- [Test with the Chat UI](/developer-guide/chat-ui)
+- [Configure the Cube Agent](/docs/developer/guide/hal)
+- [Upload Private Models](/docs/developer/guide/private-model-upload)
+- [Test with the Chat UI](/docs/developer/guide/chat-ui)

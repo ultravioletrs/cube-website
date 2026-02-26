@@ -165,7 +165,7 @@ This section focuses on user-facing UI behavior.
 Developer-oriented documentation related to UI integration and customization,
 including the Chat UI and backend configuration, is available in:
 
-👉 [Chat UI](../developer-guide/chat-ui)
+👉 [Chat UI](/docs/developer/guide/chat-ui)
 
 ---
 

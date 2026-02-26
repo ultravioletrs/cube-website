@@ -1,0 +1,9 @@
+﻿{
+  "title": "User Guide",
+  "pages": [
+    "getting-started",
+    "guardrails",
+    "ui",
+    "security"
+  ]
+}
