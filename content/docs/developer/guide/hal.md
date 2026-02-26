@@ -9,7 +9,7 @@ sidebar_position: 4
 Cube HAL provides the confidential-computing runtime environment for Cube AI using Buildroot to create custom Linux images optimized for confidential computing.
 
 :::info
-This guide covers HAL image creation using Buildroot. For managing already-built HAL images and CVMs, see the [CVM Management](/developer-guide/cvm-management) guide.
+This guide covers HAL image creation using Buildroot. For managing already-built HAL images and CVMs, see the [CVM Management](/docs/developer/guide/cvm-management) guide.
 :::
 
 ## Overview
@@ -145,7 +145,7 @@ sudo cp output/images/rootfs.ext4 /etc/cube/
 
 Once the images are deployed, use the CVM management scripts to launch a confidential VM and run the Cube AI stack.
 
-See the [CVM Management](/developer-guide/cvm-management) guide for:
+See the [CVM Management](/docs/developer/guide/cvm-management) guide for:
 
 - Starting CVMs with AMD SEV-SNP or Intel TDX
 - Monitoring CVM health and status
@@ -154,6 +154,6 @@ See the [CVM Management](/developer-guide/cvm-management) guide for:
 
 ## Next Steps
 
-- [Manage CVMs](/developer-guide/cvm-management) - Learn to start, monitor, and manage CVMs
-- [Upload Private Models](/developer-guide/private-model-upload) - Add custom models to your CVM
-- [Test with Chat UI](/developer-guide/chat-ui) - Interact with models through the web interface
+- [Manage CVMs](/docs/developer/guide/cvm-management) - Learn to start, monitor, and manage CVMs
+- [Upload Private Models](/docs/developer/guide/private-model-upload) - Add custom models to your CVM
+- [Test with Chat UI](/docs/developer/guide/chat-ui) - Interact with models through the web interface
