@@ -1,7 +1,7 @@
 ---
 id: cloud-init
 title: Cloud-Init
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 ## Cloud-Init
@@ -54,6 +54,8 @@ sudo apt-get install qemu-system-x86 cloud-image-utils wget ovmf
 ## Steps
 
 ### 1. Clone the Cube Repository
+
+This guide uses the main Cube repository (not the `cube-docs` / `cube-website` documentation repositories):
 
 ```bash
 git clone https://github.com/ultravioletrs/cube.git
@@ -143,6 +145,10 @@ users:
     shell: /usr/sbin/nologin
 ```
 
+:::warning Security
+The example above uses `plain_text_passwd: password` for local development and testing only. Always replace it with a strong, unique password (or preferably SSH key-based access) before exposing a VM to any network or using it in staging/production.
+:::
+
 **Cube Agent Environment** (`/etc/cube/agent.env`):
 
 ```bash
@@ -229,7 +235,7 @@ The VM exposes services via QEMU port forwarding:
 
 ### Local Development
 
-For local development with the Cube UI, update `docker/.env` with the VM's IP address:
+For local development with the Cube UI in the main `cube` repository, update `cube/docker/.env` with the VM's IP address:
 
 ```bash
 UV_CUBE_NEXTAUTH_URL=http://<vm-ip-address>:${UI_PORT}
