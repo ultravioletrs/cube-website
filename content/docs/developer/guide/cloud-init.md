@@ -164,11 +164,11 @@ UV_CUBE_AGENT_TARGET_URL=http://localhost:11434
 UV_CUBE_AGENT_SERVER_CERT=/etc/cube/certs/server.crt
 UV_CUBE_AGENT_SERVER_KEY=/etc/cube/certs/server.key
 UV_CUBE_AGENT_SERVER_CA_CERTS=/etc/cube/certs/ca.crt
-UV_CUBE_AGENT_CA_URL=https://prism.ultraviolet.rs/am-certs
+UV_CUBE_AGENT_CA_URL=http://<internal-ca-host>
 ```
 
 :::note
-`UV_CUBE_AGENT_CA_URL` is the full certificate endpoint used by the Ubuntu launcher script. In the HAL guide, `https://cloud.prism.ultraviolet.rs` is documented as the CA base URL.
+Use the internal URL for your locally deployed CA provider. `UV_CUBE_AGENT_CA_URL` expects the full certificate endpoint.
 :::
 
 To modify agent configuration, edit the `write_files` section for `/etc/cube/agent.env` in `qemu.sh` before launching, or edit `/etc/cube/agent.env` inside the VM and restart the service:
