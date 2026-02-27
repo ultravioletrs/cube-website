@@ -62,6 +62,10 @@ git clone https://github.com/ultravioletrs/cube.git
 cd cube/hal/ubuntu
 ```
 
+:::note
+Use `cube/hal/ubuntu` for this workflow. The cloud-init launcher (`qemu.sh`) is maintained in that directory.
+:::
+
 ### 2. Launch the VM
 
 The `qemu.sh` script automates the entire process — downloading the Ubuntu base image, generating cloud-init configuration, creating the seed image, and launching QEMU:
@@ -162,6 +166,10 @@ UV_CUBE_AGENT_SERVER_KEY=/etc/cube/certs/server.key
 UV_CUBE_AGENT_SERVER_CA_CERTS=/etc/cube/certs/ca.crt
 UV_CUBE_AGENT_CA_URL=https://prism.ultraviolet.rs/am-certs
 ```
+
+:::note
+`UV_CUBE_AGENT_CA_URL` is the full certificate endpoint used by the Ubuntu launcher script. In the HAL guide, `https://cloud.prism.ultraviolet.rs` is documented as the CA base URL.
+:::
 
 To modify agent configuration, edit the `write_files` section for `/etc/cube/agent.env` in `qemu.sh` before launching, or edit `/etc/cube/agent.env` inside the VM and restart the service:
 
