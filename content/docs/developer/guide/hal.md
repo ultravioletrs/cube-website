@@ -106,7 +106,7 @@ Navigate to `Target packages` → `Cube packages` → `cube-agent` to configure 
 
 The agent integrates with [Abstract Machines Certs Service](https://github.com/absmach/certs)for certificate management:
 
-- **CA Base URL:** `https://cloud.prism.ultraviolet.rs`
+- **CA Base URL:** `http://<internal-ca-host>`
 - **CA Documentation:** [Docs](https://github.com/absmach/certs/blob/main/README.md)
 
 #### Save Configuration
