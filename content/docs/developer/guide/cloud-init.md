@@ -230,24 +230,9 @@ When TDX is enabled, the script:
 
 ### Port Forwarding
 
-The VM exposes services via QEMU port forwarding:
-
-| Host Port | Guest Port | Service |
-| --- | --- | --- |
-| `6190` | `22` | SSH |
-| `6191` | `80` | HTTP |
-| `6192` | `443` | HTTPS |
-| `6193` | `7001` | Cube Agent API |
+The VM exposes services via QEMU port forwarding the host port 6193 which forwards to the port 7001 inside the CVM where the Cube Agent API listens.
 
 ## Post-Boot Setup
-
-### Local Development
-
-For local development with the Cube UI in the main `cube` repository, update `cube/docker/.env` with the VM's IP address:
-
-```bash
-UV_CUBE_NEXTAUTH_URL=http://<vm-ip-address>:${UI_PORT}
-```
 
 ### Adding Custom Models
 
