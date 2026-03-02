@@ -106,7 +106,37 @@ SCRIPT
 chmod +x cube/hal/buildroot/linux/board/cube/overlay/usr/libexec/ollama/register-custom-models.sh
 ```
 
-4. Build the image:
+4. Hook the registration script into boot so it runs automatically after Ollama comes up:
+
+For the default Buildroot SysV init flow:
+
+```bash
+mkdir -p cube/hal/buildroot/linux/board/cube/overlay/etc/init.d/
+cat > cube/hal/buildroot/linux/board/cube/overlay/etc/init.d/S97ollama-custom-models << 'SCRIPT'
+#!/bin/sh
+
+case "$1" in
+  start)
+    /usr/libexec/ollama/register-custom-models.sh &
+    ;;
+esac
+SCRIPT
+chmod +x cube/hal/buildroot/linux/board/cube/overlay/etc/init.d/S97ollama-custom-models
+```
+
+For systemd-based images, add a drop-in instead:
+
+```bash
+mkdir -p cube/hal/buildroot/linux/board/cube/overlay/usr/lib/systemd/system/ollama.service.d/
+cat > cube/hal/buildroot/linux/board/cube/overlay/usr/lib/systemd/system/ollama.service.d/register-custom-models.conf << 'EOF'
+[Service]
+ExecStartPost=/usr/libexec/ollama/register-custom-models.sh
+EOF
+```
+
+This ensures the registration script runs automatically after the main Ollama service starts.
+
+5. Build the image:
 
 ```bash
 cd buildroot
@@ -136,6 +166,8 @@ BR2_PACKAGE_VLLM_MODEL="meta-llama/Llama-2-7b-hf"
 BR2_PACKAGE_VLLM_GPU_MEMORY="0.90"
 BR2_PACKAGE_VLLM_MAX_MODEL_LEN="2048"
 ```
+
+`BR2_PACKAGE_VLLM_GPU_MEMORY` is the Buildroot config symbol. During image creation it is written into `/etc/vllm/vllm.env` as `VLLM_GPU_MEMORY_UTILIZATION`, which is the runtime variable consumed by the vLLM service.
 
 Then rebuild:
 
@@ -188,7 +220,9 @@ runcmd:
   - mkdir -p /var/lib/vllm/models
   # Download from a private HuggingFace registry (requires token for gated models)
   - |
-    HF_TOKEN="your-token-here"
+    # Placeholder only. Do not commit real tokens into qemu.sh.
+    # In production, inject HF_TOKEN via environment variables or a secret manager.
+    HF_TOKEN="${HF_TOKEN:-your-token-here}"
     huggingface-cli download my-org/my-private-model \
       --local-dir /var/lib/vllm/models/my-private-model \
       --token "$HF_TOKEN"
@@ -213,8 +247,8 @@ After a CVM is running (regardless of which approach was used to create it), you
 #### 1. Transfer and Register
 
 ```bash
-# Package model files on the host
-tar -czvf my-model.tar.gz /path/to/model/files
+# Package a model directory on the host
+tar -czvf my-model.tar.gz /path/to/model/files/
 
 # Copy into the CVM (port 6190 forwards to SSH port 22 inside the CVM)
 scp -P 6190 my-model.tar.gz root@localhost:/var/lib/ollama/
@@ -233,9 +267,9 @@ EOF
 ollama create my-custom-model -f /tmp/Modelfile
 ```
 
-:::note
-For Ubuntu cloud-init CVMs, the default SSH user is `ultraviolet` (password: `password`). For Buildroot CVMs, the default user is `root`.
-:::
+<Callout type="info">
+For Ubuntu cloud-init CVMs, the default SSH user is `ultraviolet` (password: `password`). For Buildroot CVMs, the default user is `root`. The `password` credential is for local development only; change it immediately, or disable password login and use SSH keys before exposing the VM to any network.
+</Callout>
 
 #### 2. Verify
 

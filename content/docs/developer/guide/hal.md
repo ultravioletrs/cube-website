@@ -8,9 +8,9 @@ sidebar_position: 4
 
 Cube HAL provides the confidential-computing runtime environment for Cube AI using Buildroot to create custom Linux images optimized for confidential computing.
 
-:::info
+<Callout type="info">
 This guide covers HAL image creation using Buildroot. For managing already-built HAL images and CVMs, see the [CVM Management](/docs/developer/guide/cvm-management) guide.
-:::
+</Callout>
 
 ## Overview
 
