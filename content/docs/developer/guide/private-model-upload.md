@@ -40,11 +40,17 @@ During HAL image configuration (see [HAL guide](/developer-guide/hal)), navigate
 
 Path: `Target packages → Cube packages → ollama`
 
+![Cube AI Services menu](/img/buildroot-cube-ai-services-menu.png)
+*Cube AI Services menu in Buildroot menuconfig showing the Ollama section and available configuration options*
+
 Set the **Custom models to install** field with a space-separated list of Ollama model tags:
 
 ```text
 llama2:7b mistral:7b codellama:13b
 ```
+
+![Custom models to install dialog](/img/buildroot-ollama-custom-models.png)
+*Entering model tags in the Custom models to install input dialog*
 
 These models are pulled automatically on first boot by a script installed at `/usr/libexec/ollama/pull-models.sh`.
 
@@ -148,6 +154,12 @@ make -j$(nproc)
 #### Using menuconfig
 
 Navigate to **Target packages → Cube packages → vllm** and set:
+
+![LLM Backend selection](/img/buildroot-llm-backend-selection.png)
+*LLM Backend selection dialog — choose between Ollama, vLLM, or a Custom URL endpoint*
+
+![Custom Target URL entry](/img/buildroot-llm-custom-url.png)
+*Custom Target URL dialog for pointing the Cube Agent at an external LLM backend*
 
 - **Custom model path** — Absolute path to a HuggingFace-format model directory on your build machine
 
