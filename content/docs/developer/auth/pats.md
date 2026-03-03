@@ -29,7 +29,7 @@ Use Personal Access Tokens when you need:
 To create a Personal Access Token using the Cube AI UI:
 
 1. Log in to the Cube AI UI
-2. Navigate to **Profile → PATs**
+2. Navigate to **Profile → Personal Access Tokens**
 3. Click **Create**
 4. Provide the required information:
    - **Name** — a unique name for the token
@@ -37,8 +37,23 @@ To create a Personal Access Token using the Cube AI UI:
    - **Scopes** — allowed resources and operations
 5. Click **Create** and copy the generated token
 
-⚠️ The token value is displayed only once.
+⚠️ The token value is displayed only once.  
 Store it securely, as it cannot be retrieved again.
+
+---
+
+### UI Screenshots
+
+> These screenshots reflect the current Cube AI UI.  
+> If the interface changes, update the images accordingly.
+
+#### Profile → PATs menu
+
+![Profile menu - PATs entry](/img/ui/profile-pats-menu.png)
+
+#### Create Personal Access Token dialog
+
+![Create PAT dialog](/img/ui/pats-create-dialog.png)
 
 ---
 
@@ -99,3 +114,9 @@ curl -k https://<cube-ai-instance>/proxy/<domain_id>/v1/models \
 PATs can be revoked at any time from the UI:
 
 ### Profile → PATs → Revoke
+
+---
+
+### Revoke Screenshot
+
+![Revoke PAT confirmation](/img/ui/pats-revoke-confirmation.png)

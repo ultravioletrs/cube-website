@@ -90,7 +90,7 @@ The Tokens section allows users to:
 
 Tokens are required for API access and external integrations.
 
-![Personal Access Token creation screen](/img/ui/pats.png)
+![Personal Access Tokens screen](/img/ui/pats-list.png)
 
 ---
 
