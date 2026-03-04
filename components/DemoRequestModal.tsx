@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowRight, Loader2, Globe } from "lucide-react";
 
@@ -9,9 +9,22 @@ interface DemoRequestModalProps {
     onClose: () => void;
 }
 
+interface CalendlyInitOptions {
+    url: string;
+    parentElement: HTMLElement | null;
+    prefill?: {
+        name?: string;
+        email?: string;
+        customAnswers?: Record<string, string>;
+    };
+    utm?: Record<string, string>;
+}
+
 declare global {
     interface Window {
-        Calendly?: any;
+        Calendly?: {
+            initInlineWidget: (options: CalendlyInitOptions) => void;
+        };
     }
 }
 
@@ -35,6 +48,24 @@ const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
         }, 600);
     };
 
+    const initCalendly = useCallback(() => {
+        if (window.Calendly) {
+            window.Calendly.initInlineWidget({
+                url: "https://calendly.com/ultraviolet-cube/demo",
+                parentElement: document.getElementById("calendly-embed-container"),
+                prefill: {
+                    name: formData.name,
+                    email: formData.email,
+                    customAnswers: {
+                        a1: formData.company,
+                        a2: formData.message,
+                    },
+                },
+                utm: {},
+            });
+        }
+    }, [formData]);
+
     useEffect(() => {
         if (step === "calendly" && isOpen) {
             // Load Calendly Script if not already loaded
@@ -55,32 +86,12 @@ const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
                 initCalendly();
             }
         }
-    }, [step, isOpen]);
+    }, [step, isOpen, initCalendly]);
 
-    const initCalendly = () => {
-        if (window.Calendly) {
-            window.Calendly.initInlineWidget({
-                url: "https://calendly.com/ultraviolet-cube/demo",
-                parentElement: document.getElementById("calendly-embed-container"),
-                prefill: {
-                    name: formData.name,
-                    email: formData.email,
-                    customAnswers: {
-                        a1: formData.company,
-                        a2: formData.message,
-                    },
-                },
-                utm: {},
-            });
-        }
+    const handleClose = () => {
+        setStep("form");
+        onClose();
     };
-
-    // Reset step when modal closes
-    useEffect(() => {
-        if (!isOpen) {
-            setStep("form");
-        }
-    }, [isOpen]);
 
     return (
         <AnimatePresence>
@@ -92,7 +103,7 @@ const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         className="absolute inset-0 bg-background/80 backdrop-blur-md"
-                        onClick={onClose}
+                        onClick={handleClose}
                     />
 
                     {/* Modal Content */}
@@ -104,7 +115,7 @@ const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
                             }`}
                     >
                         <button
-                            onClick={onClose}
+                            onClick={handleClose}
                             className="absolute top-6 right-6 p-2 rounded-full hover:bg-muted transition-colors z-50 text-foreground"
                         >
                             <X className="w-5 h-5" />
