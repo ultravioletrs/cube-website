@@ -136,7 +136,7 @@ The **Guardrails Service** provides AI safety controls for all LLM interactions.
 
 - Confidentiality
 - Integrity
-- Remote attestation
+- Remote attestation (powered by the [Cocos AI attestation stack](https://cocos.ai/docs/trusted-execution/attestation/attestation-introduction))
 
 ---
 

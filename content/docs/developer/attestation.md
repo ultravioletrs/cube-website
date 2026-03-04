@@ -13,6 +13,20 @@ Cube AI performs attestation both **internally** during the boot sequence of the
 
 ---
 
+## Powered by Cocos AI
+
+Cube AI utilizes the [Cocos AI attestation stack](https://cocos.ai/docs/trusted-execution/attestation/attestation-introduction) to provide robust, hardware-backed security guarantees. By building on Cocos, Cube AI benefits from established attestation mechanisms without reinventing the wheel.
+
+While Cocos AI primarily focuses on providing tools for **Secure Multi-Party Computation (SMPC)**, Cube AI leverages this foundation specifically to secure **Large Language Models (LLMs)** running inside Trusted Execution Environments (TEEs).
+
+For deep technical details on the underlying attestation mechanisms, we refer you to the excellent Cocos documentation:
+
+- **[Measured Boot](https://cocos.ai/docs/trusted-execution/attestation/attestation-measured-boot):** How the system state is measured using vTPM and Linux IMA before workloads run.
+- **[Attestation Reports](https://cocos.ai/docs/trusted-execution/attestation/attestation-attestation-report):** The structure and validation of hardware-backed reports (AMD SEV-SNP, Intel TDX).
+- **[Attested TLS (aTLS)](https://cocos.ai/docs/trusted-execution/attestation/atls):** How secure communication channels are established based on successful attestation.
+
+---
+
 ## How Cube AI Uses Attestation Today
 
 Cube AI runs inside **hardware-backed Confidential Virtual Machines (CVMs)** based on **AMD SEV-SNP and Intel TDX**.
@@ -58,12 +72,25 @@ This is essential for:
 
 ## User-Facing Attestation
 
-Cube AI exposes a user-facing attestation endpoint that allows applications
-to verify that they are interacting with a trusted Cube AI instance.
+Cube AI allows users to verify they are interacting with a trusted instance either programmatically via the API or directly through the web interface.
+
+### 🔹 Web UI
+
+Users can view the system's **Attestation Report** and the current **Attestation Policy** directly from the Chat interface. This provides a convenient, human-readable way to verify the trust guarantees of the current domain.
+
+![Attestation Report](/img/attestation-report-ui.png)
+
+![Attestation Policy](/img/attestation-policy-ui.png)
+
+Furthermore, you can download both the **Attestation Report** and the **Attestation Policy** to perform local, offline validation. You can use the [Cocos CLI](https://cocos.ai/docs/architecture-components/cli/#subcommand-attestation-validate) to cryptographically verify the downloaded report matches the downloaded policy. This ensures end-to-end trust that hasn't been tampered with by the web interface.
+
+```bash
+cocos-cli attestation validate <path-to-downloaded-report> --policy <path-to-downloaded-policy>
+```
 
 ### 🔹 Attestation Endpoint
 
-Applications can request an attestation report using:
+Applications can programmatically request an attestation report using:
 
 ```bash
 POST /attestation
