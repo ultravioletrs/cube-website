@@ -5,6 +5,7 @@
         "chat-ui",
         "private-model-upload",
         "hal",
+        "cloud-init",
         "cvm-management",
         "fine-tuning",
         "auth-and-request-flow"
