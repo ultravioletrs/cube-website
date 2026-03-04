@@ -1,6 +1,8 @@
 // source.config.ts
 import { defineConfig, defineDocs } from "fumadocs-mdx/config";
 import { metaSchema, pageSchema } from "fumadocs-core/source/schema";
+import { remarkDirectiveAdmonition } from "fumadocs-core/mdx-plugins";
+import remarkDirective from "remark-directive";
 import remarkMdx from "remark-mdx";
 var docs = defineDocs({
   dir: "content/docs",
@@ -16,7 +18,7 @@ var docs = defineDocs({
 });
 var source_config_default = defineConfig({
   mdxOptions: {
-    remarkPlugins: [remarkMdx]
+    remarkPlugins: [remarkMdx, remarkDirective, remarkDirectiveAdmonition]
   }
 });
 export {
