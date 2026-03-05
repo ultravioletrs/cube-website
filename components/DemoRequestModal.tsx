@@ -3,6 +3,7 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Globe } from "lucide-react";
+import { useTheme } from "next-themes";
 
 interface DemoRequestModalProps {
     isOpen: boolean;
@@ -13,6 +14,9 @@ const GOOGLE_CAL_URL =
     "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2go-uvRkTNc0XR_6kDLKXLBgBoTZ4AgevaBshsjgQqxSFmuV7DJCMp2HWvOLu5EdeJtHPCguCz";
 
 const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
+    const { resolvedTheme } = useTheme();
+    const isDark = resolvedTheme === "dark";
+
     return (
         <AnimatePresence>
             {isOpen && (
@@ -54,7 +58,12 @@ const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
                                 <iframe
                                     src={GOOGLE_CAL_URL}
                                     className="w-full h-full"
-                                    style={{ border: 0 }}
+                                    style={{
+                                        border: 0,
+                                        filter: isDark
+                                            ? "invert(1) hue-rotate(180deg)"
+                                            : "none",
+                                    }}
                                     title="Schedule a Demo with Cube AI"
                                     loading="lazy"
                                     allowFullScreen
