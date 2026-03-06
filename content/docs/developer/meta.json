@@ -1,6 +1,7 @@
 {
   "title": "Developer",
   "pages": [
+    "index",
     "architecture",
     "attestation",
     "platform",

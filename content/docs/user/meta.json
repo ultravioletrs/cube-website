@@ -1,6 +1,7 @@
 ﻿{
   "title": "User Guide",
   "pages": [
+    "index",
     "getting-started",
     "guardrails",
     "ui",
