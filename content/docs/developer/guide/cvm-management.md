@@ -8,9 +8,9 @@ sidebar_position: 5
 
 This guide explains how to start, monitor, and manage Confidential Virtual Machines (CVMs) for Cube AI using the Hardware Abstraction Layer (HAL) with Buildroot-based images and the provided management scripts.
 
-:::info
+<Callout type="info">
 This guide is specifically for CVM deployments using Buildroot images. For public cloud deployments using cloud-init, please refer to the separate cloud deployment documentation instead.
-:::
+</Callout>
 
 ---
 
@@ -32,7 +32,7 @@ Before starting a CVM, ensure the following files exist. These are the default p
 For testing without confidential computing features, use the standard VM mode. This helps confirm that your base image, kernel, and networking all work before adding enclave-specific requirements.
 
 ```bash
-cd /path/to/cube/hal/cloud
+cd /path/to/cube/hal/buildroot
 ./qemu.sh start
 ```
 
@@ -99,7 +99,7 @@ Edit these variables at the top of `cvm-monitor.sh` to customize behavior. Small
 VM_NAME="cube-ai-vm"                        # VM identifier
 CHECK_INTERVAL=30                           # Health check interval (seconds)
 LOG_DIR="/tmp/cube-logs"                    # Log file directory
-QEMU_SCRIPT="/path/to/cube/hal/cloud/qemu.sh"  # Path to QEMU launch script
+QEMU_SCRIPT="/path/to/cube/hal/buildroot/qemu.sh"  # Path to QEMU launch script
 ```
 
 ### Basic Usage
