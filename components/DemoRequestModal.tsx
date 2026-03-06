@@ -20,7 +20,7 @@ const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
     return (
         <AnimatePresence>
             {isOpen && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4">
                     {/* Backdrop */}
                     <motion.div
                         initial={{ opacity: 0 }}
@@ -35,26 +35,26 @@ const DemoRequestModal = ({ isOpen, onClose }: DemoRequestModalProps) => {
                         initial={{ opacity: 0, scale: 0.95, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                        className="relative w-full max-w-4xl h-[90vh] overflow-hidden bg-background border border-border shadow-2xl rounded-3xl"
+                        className="relative w-full max-w-4xl h-[95dvh] sm:h-[90vh] overflow-hidden bg-background border border-border shadow-2xl rounded-2xl sm:rounded-3xl"
                     >
                         <button
                             onClick={onClose}
-                            className="absolute top-6 right-6 p-2 rounded-full hover:bg-muted transition-colors z-50 text-foreground"
+                            className="absolute top-3 right-3 sm:top-6 sm:right-6 p-2 rounded-full hover:bg-muted transition-colors z-50 text-foreground"
                         >
                             <X className="w-5 h-5" />
                         </button>
 
-                        <div className="p-8 md:p-12 h-full flex flex-col">
-                            <div className="mb-6 mr-10">
-                                <h2 className="text-2xl font-black uppercase tracking-tight text-foreground">
+                        <div className="p-4 sm:p-8 md:p-12 h-full flex flex-col">
+                            <div className="mb-4 sm:mb-6 pr-8 sm:pr-10">
+                                <h2 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-foreground">
                                     Book a <span className="text-primary">Demo</span>
                                 </h2>
-                                <p className="text-muted-foreground text-sm">
+                                <p className="text-muted-foreground text-xs sm:text-sm mt-1 sm:mt-2">
                                     Schedule your live demo session with the Cube AI team.
                                 </p>
                             </div>
 
-                            <div className="flex-grow rounded-2xl overflow-hidden border border-border">
+                            <div className="flex-grow rounded-xl sm:rounded-2xl overflow-hidden border border-border">
                                 <iframe
                                     src={GOOGLE_CAL_URL}
                                     className="w-full h-full"
