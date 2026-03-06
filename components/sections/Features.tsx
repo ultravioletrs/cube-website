@@ -24,7 +24,7 @@ const features = [
         image: "/img/ui/domain-overview.png",
         icon: Globe,
         className: "md:col-span-2 lg:col-span-2",
-        docsLink: "/docs/ui/overview",
+        docsLink: "/docs/user/ui/overview",
     },
     {
         title: "Platform Gateways",
@@ -32,7 +32,7 @@ const features = [
         image: "/img/ui/routes.png",
         icon: Zap,
         className: "md:col-span-1 lg:col-span-1",
-        docsLink: "/docs/ui/domains",
+        docsLink: "/docs/user/ui/domains",
     },
     {
         title: "Security Guardrails",
@@ -40,7 +40,7 @@ const features = [
         image: "/img/ui/guardrails.png",
         icon: ShieldAlert,
         className: "md:col-span-1 lg:col-span-1",
-        docsLink: "/docs/guardrails",
+        docsLink: "/docs/user/guardrails",
     },
     {
         title: "Model Management",
@@ -48,7 +48,7 @@ const features = [
         image: "/img/ui/models.png",
         icon: Database,
         className: "md:col-span-2 lg:col-span-2",
-        docsLink: "/docs/vllm",
+        docsLink: "/docs/developer/platform/vllm",
     },
     {
         title: "Audit & Compliance",
@@ -56,7 +56,7 @@ const features = [
         image: "/img/ui/audit-logs.png",
         icon: Users,
         className: "md:col-span-2 lg:col-span-2",
-        docsLink: "/docs/security/audit-logs",
+        docsLink: "/docs/user/security/audit-logs",
     },
     {
         title: "Secure Chat",
@@ -64,7 +64,7 @@ const features = [
         image: "/img/chat-ui.png",
         icon: MessageSquare,
         className: "md:col-span-1 lg:col-span-1",
-        docsLink: "/docs/attestation",
+        docsLink: "/docs/developer/attestation",
     },
 ];
 
