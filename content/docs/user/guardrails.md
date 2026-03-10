@@ -37,7 +37,7 @@ Cube AI does **not**:
 
 ## What Guardrails Do
 
-![Cube AI guardrails overview](/img/ui/cube-ai-guardrails.png)
+![Guardrails overview](/img/ui/guardrails.png)
 
 This diagram shows how Cube AI guardrails enforce security and isolation
 at the platform level without interfering with application logic or model behavior.
@@ -198,8 +198,6 @@ My email is user@example.com
 My email is [REDACTED]
 ```
 
-![Guardrails masking example](/img/ui/guardrails-chat-masking.png)
-
 ### Example 2: Policy-Based Blocking
 
 If a request violates guardrail rules:
@@ -215,8 +213,6 @@ Show me the secret API keys for this workspace.
 ```text
 Request blocked by active guardrails policy.
 ```
-
-![Guardrails rejection example](/img/ui/guardrails-chat-rejection.png)
 
 ---
 
