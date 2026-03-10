@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Github } from "lucide-react";
+import { Menu, X, Github, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import BrandLogo from "@/components/BrandLogo";
@@ -23,7 +23,15 @@ const Navbar = () => {
 
     const navLinks = [
         { name: "FEATURES", href: "#architecture" },
-        { name: "SOLUTIONS", href: "#solutions" },
+        { 
+            name: "USE CASES", 
+            href: "#solutions",
+            dropdown: [
+                { name: "Financial Services", href: "/use-cases/financial-services" },
+                { name: "Healthcare & Life Sciences", href: "/use-cases/healthcare" },
+                { name: "Government & Defense", href: "/use-cases/government" },
+            ]
+        },
         { name: "ENTERPRISE", href: "#enterprise" },
         { name: "DOCUMENTATION", href: "/docs" },
         { name: "CONTACT", href: "mailto:info@ultraviolet.rs" },
@@ -50,10 +58,24 @@ const Navbar = () => {
                             <div key={link.name} className="relative group">
                                 <Link
                                     href={link.href}
-                                    className="text-sm font-medium text-neutral-600 hover:text-black transition-colors"
+                                    className="flex items-center text-sm font-medium text-neutral-600 hover:text-black transition-colors"
                                 >
                                     {link.name}
+                                    {link.dropdown && <ChevronDown className="ml-1 w-4 h-4 transition-transform group-hover:rotate-180" />}
                                 </Link>
+                                {link.dropdown && (
+                                    <div className="absolute top-full left-0 mt-6 w-64 bg-white border border-neutral-200 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-2">
+                                        {link.dropdown.map((sublink) => (
+                                            <Link
+                                                key={sublink.name}
+                                                href={sublink.href}
+                                                className="block px-4 py-2 text-sm text-neutral-600 hover:text-black hover:bg-neutral-50"
+                                            >
+                                                {sublink.name}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                )}
                             </div>
                         ))}
                         <Link
@@ -96,10 +118,26 @@ const Navbar = () => {
                                     <Link
                                         href={link.href}
                                         className="block text-sm font-medium text-neutral-600"
-                                        onClick={() => setIsOpen(false)}
+                                        onClick={(e) => {
+                                            if (!link.dropdown) setIsOpen(false);
+                                        }}
                                     >
                                         {link.name}
                                     </Link>
+                                    {link.dropdown && (
+                                        <div className="pl-4 space-y-2 border-l-2 border-neutral-100 ml-2 mt-2">
+                                            {link.dropdown.map((sublink) => (
+                                                <Link
+                                                    key={sublink.name}
+                                                    href={sublink.href}
+                                                    className="block text-sm text-neutral-500 hover:text-black"
+                                                    onClick={() => setIsOpen(false)}
+                                                >
+                                                    {sublink.name}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    )}
                                 </div>
                             ))}
                             <div className="pt-4 flex flex-col gap-4 border-t border-neutral-100">
