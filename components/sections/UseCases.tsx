@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { HeartPulse, BarChart3, Shield, Building2 } from "lucide-react";
+import { HeartPulse, BarChart3, Shield } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 

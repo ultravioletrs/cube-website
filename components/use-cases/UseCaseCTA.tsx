@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 interface CTAProps {
     heading: string;
@@ -37,12 +38,12 @@ export default function UseCaseCTA({ heading, description }: CTAProps) {
                             Request a Demo
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </a>
-                        <a 
+                        <Link 
                             href="/docs" 
                             className="w-full sm:w-auto inline-flex items-center justify-center px-10 py-5 bg-white/5 border border-white/10 text-white font-bold rounded-full hover:bg-white/10 transition-all text-lg"
                         >
                             Read Documentation
-                        </a>
+                        </Link>
                     </div>
                 </motion.div>
             </div>

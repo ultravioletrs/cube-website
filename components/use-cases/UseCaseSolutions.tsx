@@ -23,7 +23,7 @@ export default function UseCaseSolutions({ solutions }: SolutionsProps) {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {solutions.map((solution, index) => {
-                        const Icon = (LucideIcons as any)[solution.icon] || LucideIcons.CheckCircle;
+                        const Icon = (LucideIcons as unknown as Record<string, React.ElementType>)[solution.icon] || LucideIcons.CheckCircle;
                         return (
                             <motion.div
                                 key={index}

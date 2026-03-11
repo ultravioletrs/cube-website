@@ -118,7 +118,7 @@ const Navbar = () => {
                                     <Link
                                         href={link.href}
                                         className="block text-sm font-medium text-neutral-600"
-                                        onClick={(e) => {
+                                        onClick={() => {
                                             if (!link.dropdown) setIsOpen(false);
                                         }}
                                     >
