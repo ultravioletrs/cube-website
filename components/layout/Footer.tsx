@@ -7,7 +7,7 @@ const Footer = () => {
     return (
         <footer className="bg-muted/50 border-t py-16 text-base">
             <div className="container mx-auto px-4 md:px-6">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-12">
                     <div className="md:col-span-1">
                         <Link href="https://www.ultraviolet.rs/" target="_blank" rel="noopener noreferrer" className="inline-block mb-4">
                             <Image
@@ -28,6 +28,15 @@ const Footer = () => {
                         <ul className="space-y-2">
                             <li><Link href="/docs" className="text-muted-foreground hover:text-primary">Cube AI Documentation</Link></li>
                             <li><a href="https://docs.google.com/presentation/d/1UJR6HKiBV3r56SyMNZvO3ylek8VFmNojbFkTC-bawBY/export/pdf" className="text-muted-foreground hover:text-primary">Cube AI Datasheet</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 className="font-bold text-xl mb-4">Use Cases</h3>
+                        <ul className="space-y-2">
+                            <li><Link href="/use-cases/financial-services" className="text-muted-foreground hover:text-primary">Financial Services</Link></li>
+                            <li><Link href="/use-cases/healthcare" className="text-muted-foreground hover:text-primary">Healthcare & Life Sciences</Link></li>
+                            <li><Link href="/use-cases/government" className="text-muted-foreground hover:text-primary">Government & Defense</Link></li>
                         </ul>
                     </div>
 

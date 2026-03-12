@@ -16,7 +16,15 @@ export default function MarketingLayout({
             searchToggle={{ enabled: false }}
             links={[
                 { text: "Features", url: "/#architecture" },
-                { text: "Solutions", url: "/#solutions" },
+                {
+                    type: "menu",
+                    text: "Use Cases",
+                    items: [
+                        { text: "Financial Services", url: "/use-cases/financial-services" },
+                        { text: "Healthcare & Life Sciences", url: "/use-cases/healthcare" },
+                        { text: "Government & Defense", url: "/use-cases/government" },
+                    ],
+                },
                 { text: "Enterprise", url: "/#enterprise" },
                 { text: "Documentation", url: "/docs" },
                 { text: "Contact", url: "mailto:info@ultraviolet.rs" },

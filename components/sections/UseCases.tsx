@@ -1,29 +1,28 @@
 "use client";
 
 import React from "react";
-import { HeartPulse, BarChart3, Headset, Building2 } from "lucide-react";
+import { HeartPulse, BarChart3, Shield } from "lucide-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const useCases = [
     {
-        title: "Healthcare",
-        description: "Process patient records securely and generate diagnostic insights without exposing private data or violating regulations.",
-        icon: HeartPulse,
-    },
-    {
-        title: "Finance",
-        description: "Analyze confidential transactions and detect fraud with robust protections for computational integrity.",
+        title: "Financial Services",
+        description: "Protect proprietary algorithms, analyze confidential financial data, and adopt generative AI while strictly adhering to SEC and FINRA compliance frameworks.",
         icon: BarChart3,
+        href: "/use-cases/financial-services",
     },
     {
-        title: "Customer Support",
-        description: "Deploy private chatbots capable of handling sensitive queries with complete data security.",
-        icon: Headset,
+        title: "Healthcare",
+        description: "Process patient records, analyze medical imaging, and accelerate medical research without exposing Protected Health Information (PHI) or violating HIPAA.",
+        icon: HeartPulse,
+        href: "/use-cases/healthcare",
     },
     {
-        title: "Enterprise AI",
-        description: "Protect proprietary models and sensitive internal data throughout development and deployment.",
-        icon: Building2,
+        title: "Government & Defense",
+        description: "Deploy generative AI workloads in zero-trust environments. Protect classified intelligence and mission-critical data while strictly adhering to FedRAMP.",
+        icon: Shield,
+        href: "/use-cases/government",
     },
 ];
 
@@ -40,25 +39,32 @@ const UseCases = () => {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
-                    {useCases.map((useCase, index) => (
-                        <motion.div
-                            key={useCase.title}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className="flex flex-col items-center text-center"
-                        >
-                            <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mb-6 text-primary">
-                                <useCase.icon className="w-8 h-8" />
-                            </div>
-                            <h3 className="text-2xl font-bold mb-5">{useCase.title}</h3>
-                            <p className="text-neutral-400 text-base leading-relaxed">
-                                {useCase.description}
-                            </p>
-                        </motion.div>
-                    ))}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+                    {useCases.map((useCase, index) => {
+                        const CardWrapper = useCase.href ? Link : "div";
+                        return (
+                            <motion.div
+                                key={useCase.title}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                            >
+                                <CardWrapper 
+                                    href={useCase.href || "#"}
+                                    className="flex flex-col items-center text-center p-6 rounded-2xl hover:bg-neutral-900 transition-colors h-full border border-transparent hover:border-neutral-800"
+                                >
+                                    <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mb-6 text-primary">
+                                        <useCase.icon className="w-8 h-8" />
+                                    </div>
+                                    <h3 className="text-2xl font-bold mb-5">{useCase.title}</h3>
+                                    <p className="text-neutral-400 text-base leading-relaxed">
+                                        {useCase.description}
+                                    </p>
+                                </CardWrapper>
+                            </motion.div>
+                        );
+                    })}
                 </div>
 
                 <motion.div
