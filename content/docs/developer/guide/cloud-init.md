@@ -6,7 +6,7 @@ sidebar_position: 6
 
 ## Cloud-Init
 
-Cube AI can be deployed on standard Ubuntu cloud images using [cloud-init](https://cloud-init.io/) for automated provisioning. This approach uses a pre-built Ubuntu base image and configures the Cube AI stack (Cube Agent, Ollama, TLS certificates) at first boot via cloud-init user-data.
+Cube AI can be deployed on standard Ubuntu cloud images using [cloud-init](https://cloud-init.io/) for automated provisioning. This approach uses a pre-built Ubuntu base image and configures the Cube AI stack (Cube Agent, Ollama or vLLM, TLS certificates) at first boot via cloud-init user-data.
 
 :::info
 This guide covers the cloud-init based deployment using Ubuntu. For building minimal custom images from source, see the [HAL](/developer-guide/hal) guide.
@@ -17,11 +17,11 @@ This guide covers the cloud-init based deployment using Ubuntu. For building min
 The cloud-init approach provisions a standard Ubuntu Noble (24.04) cloud image with:
 
 - Cube Agent built from source at first boot
-- Ollama LLM backend installed via official installer
+- Ollama or vLLM LLM backend
 - Self-signed TLS certificates for mTLS
-- Systemd services for Cube Agent and Ollama
+- Systemd services for Cube Agent and the chosen backend
 - Default LLM models pulled in the background
-- Support for Intel TDX confidential VMs
+- Support for Intel TDX and AMD SEV-SNP confidential VMs
 
 ## Cloud-Init vs Buildroot
 
@@ -45,64 +45,107 @@ Before running the cloud-init deployment, ensure you have:
 - `wget` for downloading the base image
 - OVMF firmware (`/usr/share/OVMF/OVMF_CODE.fd` and `OVMF_VARS.fd`)
 
+For AMD SEV-SNP deployments, also install `genisoimage` — used to create the seed ISO bundling the custom kernel.
+
 Install dependencies on Ubuntu/Debian:
 
 ```bash
 sudo apt-get install qemu-system-x86 cloud-image-utils wget ovmf
+
+# For SNP only
+sudo apt-get install genisoimage
 ```
+
+## Configuration Files
+
+The `hal/ubuntu/` directory contains separate cloud-init files for each CVM mode and backend:
+
+| File | CVM Mode | Backend |
+| --- | --- | --- |
+| `user-data-tdx.yaml` | Intel TDX | Ollama |
+| `user-data-snp.yaml` | AMD SEV-SNP | Ollama |
+| `user-data-regular.yaml` | Regular KVM (no CVM) | Ollama |
+| `user-data-vllm-tdx.yaml` | Intel TDX | vLLM |
+| `user-data-vllm-snp.yaml` | AMD SEV-SNP | vLLM |
+| `user-data-vllm-regular.yaml` | Regular KVM (no CVM) | vLLM |
+
+The `qemu.sh` script automatically selects the Ollama variants (`user-data-{mode}.yaml`) based on detected or forced CVM mode. To use vLLM, pass the corresponding `user-data-vllm-{mode}.yaml` file manually or edit `qemu.sh` to point to the desired file.
 
 ## Steps
 
 ### 1. Clone the Cube Repository
-
-This guide uses the main Cube repository (not the `cube-docs` / `cube-website` documentation repositories):
 
 ```bash
 git clone https://github.com/ultravioletrs/cube.git
 cd cube/hal/ubuntu
 ```
 
-:::note
-Use `cube/hal/ubuntu` for this workflow. The cloud-init launcher (`qemu.sh`) is maintained in that directory.
-:::
-
 ### 2. Launch the VM
 
-The `qemu.sh` script automates the entire process — downloading the Ubuntu base image, generating cloud-init configuration, creating the seed image, and launching QEMU:
+The `qemu.sh` script automates the entire process — downloading the Ubuntu base image, creating the seed image, and launching QEMU.
+
+#### Auto-detect CVM mode
 
 ```bash
-sudo ./qemu.sh
+sudo ./qemu.sh start
 ```
 
-The script performs the following:
+This detects available CVM support on the host (TDX or SNP) and launches with the appropriate configuration.
 
-1. Downloads the Ubuntu Noble server cloud image (if not already cached)
-2. Creates a QCOW2 overlay image with 35GB disk
-3. Generates cloud-init user-data and meta-data
-4. Creates a seed ISO image with `cloud-localds`
-5. Detects TDX support and configures QEMU accordingly
-6. Launches the VM
+#### Force a specific mode
+
+```bash
+sudo ./qemu.sh start_tdx       # Intel TDX
+sudo ./qemu.sh start_regular   # Regular KVM (no CVM)
+```
+
+#### AMD SEV-SNP (two steps required)
+
+SNP requires a two-step process because the custom kernel must be installed before booting with SNP:
+
+```bash
+# Step 1: Boot in regular KVM mode to install the custom kernel via cloud-init
+sudo ./qemu.sh prepare_snp
+
+# Step 2: Once prepare_snp completes, boot the prepared image with SNP
+sudo ./qemu.sh start_snp
+```
+
+See [AMD SEV-SNP](#amd-sev-snp) below for details on the custom kernel requirement.
+
+#### Environment variables
+
+```bash
+ENABLE_CVM=tdx sudo ./qemu.sh start      # Force TDX
+ENABLE_CVM=none sudo ./qemu.sh start     # Disable CVM
+RAM=32768M CPU=16 sudo ./qemu.sh start   # Customize resources
+```
+
+:::note
+SNP does not support the `ENABLE_CVM=snp` shortcut — it requires the explicit two-step process (`prepare_snp` then `start_snp`) described above.
+:::
 
 ### 3. First Boot Provisioning
 
 On first boot, cloud-init automatically:
 
 1. Creates the `ultraviolet` user with sudo access
-2. Creates the `ollama` system user
-3. Installs packages: `curl`, `git`, `golang-go`, `build-essential`
-4. Generates TLS certificates (CA, server, and client certificates for mTLS)
-5. Installs Ollama from the official installer
-6. Clones the Cube repository and builds the agent from source
-7. Starts Ollama and Cube Agent systemd services
-8. Pulls default LLM models in the background (`llama3.2:3b`, `starcoder2:3b`, `nomic-embed-text:v1.5`)
+2. Creates the `ollama` or `vllm` system user (depending on backend)
+3. Installs packages: `curl`, `git`, `build-essential`
+4. Installs Go from the official source (version matching `go.mod`)
+5. Generates TLS certificates (CA, server, and client for mTLS)
+6. Installs the chosen backend (Ollama or vLLM)
+7. Clones the Cube repository and builds the agent from source
+8. Starts backend and Cube Agent systemd services
+9. Pulls default LLM models in the background (Ollama only)
 
 :::note
-First boot provisioning takes several minutes as it installs packages, builds the Cube Agent, and pulls LLM models. You can monitor progress via the console output or check `/var/log/cloud-init-output.log` inside the VM.
+First boot provisioning takes several minutes. Monitor progress via the console output or check `/var/log/cloud-init-output.log` inside the VM.
 :::
 
 ### 4. Access the VM
 
-Once the VM is running, connect via SSH:
+Once provisioning is complete, connect via SSH:
 
 ```bash
 ssh -p 6190 ultraviolet@localhost
@@ -115,67 +158,93 @@ Default credentials:
 
 ### 5. Verify Services
 
-Check that both services are running:
-
 ```bash
 systemctl status cube-agent.service
-systemctl status ollama.service
+systemctl status ollama.service   # or vllm.service
 ```
 
-Check model pull progress:
+## CVM Support
 
-```bash
-tail -f /var/log/ollama-pull.log
+### Intel TDX
+
+The script auto-detects Intel TDX support on the host. TDX mode uses `user-data-tdx.yaml`, which:
+
+- Installs the `tdx_guest` kernel module
+- Configures the `tdx_guest` module to load at boot
+- Sets `AGENT_OS_TYPE=tdx`
+
+Ubuntu 24.04 has `CONFIG_INTEL_TDX_GUEST=y` built into the standard kernel — no custom kernel is needed.
+
+### AMD SEV-SNP
+
+SNP support requires Coconut SVSM on the host, which in turn requires a custom kernel inside the guest VM. The standard Ubuntu 24.04 kernel does not support Coconut SVSM.
+
+#### Custom Kernel Requirement
+
+The guest kernel must be custom-built with the following configuration options:
+
+- `CONFIG_AMD_MEM_ENCRYPT=y` — AMD memory encryption support
+- `CONFIG_SEV_GUEST=y` — SEV guest driver
+- `CONFIG_TCG_PLATFORM=y` — vTPM support
+- Coconut SVSM guest support patches applied
+
+The kernel must be packaged as `.deb` files and placed in a `debs/` directory next to `qemu.sh`:
+
+```text
+hal/ubuntu/
+  qemu.sh
+  user-data-snp.yaml
+  debs/
+    linux-image-*.deb
+    linux-headers-*.deb
 ```
+
+#### Two-Step Boot Process
+
+**Step 1 — `prepare_snp`**: Boots the Ubuntu image in regular KVM mode (no SNP flags). Cloud-init mounts the seed ISO, installs the `.deb` kernel packages, and runs `update-grub`. The seed ISO is created using `genisoimage` and includes both the `user-data` and the `debs/` directory.
+
+**Step 2 — `start_snp`**: Boots the prepared image using IGVM and Coconut SVSM QEMU. The guest boots with the custom kernel installed in Step 1.
+
+#### Host Requirements for SNP
+
+- AMD EPYC CPU with SEV-SNP support (Milan or newer)
+- SEV-SNP enabled in BIOS
+- Host kernel with SEV-SNP/SVSM support
+- `/dev/sev` device available
+- Coconut SVSM QEMU binary
+- IGVM file (default: `/etc/cocos/coconut-qemu.igvm`, or set `IGVM` env var)
+- `genisoimage` installed
+- Custom kernel `.deb` files in `debs/`
 
 ## Configuration
 
-### Cloud-Init User-Data
+### Cube Agent Environment
 
-The cloud-init configuration is embedded in `qemu.sh` as a heredoc. It uses the standard `#cloud-config` format with the following sections:
-
-**Users:**
-
-```yaml
-users:
-  - name: ultraviolet
-    plain_text_passwd: password
-    lock_passwd: false
-    sudo: ALL=(ALL) NOPASSWD:ALL
-    shell: /bin/bash
-  - name: ollama
-    system: true
-    home: /var/lib/ollama
-    shell: /usr/sbin/nologin
-```
-
-:::warning Security
-The example above uses `plain_text_passwd: password` for local development and testing only. Always replace it with a strong, unique password (or preferably SSH key-based access) before exposing a VM to any network or using it in staging/production.
-:::
-
-**Cube Agent Environment** (`/etc/cube/agent.env`):
+The agent is configured via `/etc/cube/agent.env`:
 
 ```bash
 UV_CUBE_AGENT_LOG_LEVEL=info
 UV_CUBE_AGENT_HOST=0.0.0.0
 UV_CUBE_AGENT_PORT=7001
 UV_CUBE_AGENT_INSTANCE_ID=cube-agent-01
-UV_CUBE_AGENT_TARGET_URL=http://localhost:11434
+UV_CUBE_AGENT_TARGET_URL=http://localhost:11434  # 11434 for Ollama, 8000 for vLLM
 UV_CUBE_AGENT_SERVER_CERT=/etc/cube/certs/server.crt
 UV_CUBE_AGENT_SERVER_KEY=/etc/cube/certs/server.key
 UV_CUBE_AGENT_SERVER_CA_CERTS=/etc/cube/certs/ca.crt
-UV_CUBE_AGENT_CA_URL=http://<internal-ca-host>
+UV_CUBE_AGENT_CA_URL=https://prism.ultraviolet.rs/am-certs
 ```
 
-:::note
-Use the internal URL for your locally deployed CA provider. `UV_CUBE_AGENT_CA_URL` expects the full certificate endpoint.
-:::
+The cube agent is backend-agnostic — it proxies all requests to `UV_CUBE_AGENT_TARGET_URL`. Set this to `http://localhost:11434` for Ollama or `http://localhost:8000` for vLLM.
 
-To modify agent configuration, edit the `write_files` section for `/etc/cube/agent.env` in `qemu.sh` before launching, or edit `/etc/cube/agent.env` inside the VM and restart the service:
+To modify configuration, edit `/etc/cube/agent.env` inside the VM and restart the service:
 
 ```bash
 sudo systemctl restart cube-agent.service
 ```
+
+:::warning Security
+The example above uses `plain_text_passwd: password` for local development and testing only. Always use a strong password or SSH key-based access before exposing a VM to any network or using it in staging/production.
+:::
 
 ### TLS Certificates
 
@@ -189,58 +258,34 @@ Cloud-init generates self-signed certificates at first boot:
 
 Key files are set to `600` permissions, certificates to `644`.
 
-For production deployments, replace these with certificates from a trusted CA or configure the `UV_CUBE_AGENT_CA_URL` to fetch certificates at runtime from the [Certs Service](https://github.com/absmach/certs).
+For production deployments, replace these with certificates from a trusted CA or configure `UV_CUBE_AGENT_CA_URL` to fetch certificates at runtime from the [Certs Service](https://github.com/absmach/certs).
 
 ### VM Resources
 
-The default VM resources are defined at the top of `qemu.sh`:
-
-| Parameter | Default | Description |
+| Parameter | Default | Variable |
 | --- | --- | --- |
-| `DISK_SIZE` | `35G` | Disk size for the QCOW2 image |
-| `RAM` | `16384M` | VM memory allocation |
-| `CPU` | `8` | Number of vCPUs |
-
-Modify these variables in `qemu.sh` before launching to adjust resources.
-
-## CVM Support
-
-### Intel TDX
-
-The script auto-detects Intel TDX support on the host. TDX mode can be controlled via the `ENABLE_CVM` environment variable:
+| Disk size | `35G` | `DISK_SIZE` |
+| RAM | `16384M` | `RAM` |
+| vCPUs | `8` | `CPU` |
 
 ```bash
-# Auto-detect (default)
-sudo ENABLE_CVM=auto ./qemu.sh
-
-# Force TDX mode
-sudo ENABLE_CVM=tdx ./qemu.sh
-
-# Disable CVM (regular VM)
-sudo ENABLE_CVM=none ./qemu.sh
+RAM=32768M CPU=16 sudo ./qemu.sh start
 ```
-
-When TDX is enabled, the script:
-
-- Configures memory backend with `memfd` and `share=true`
-- Adds the `tdx-guest` object with quote generation socket (vsock port 4050, CID 2)
-- Uses `q35` machine with `confidential-guest-support=tdx0`
-- Enables IOMMU platform for virtio devices
-- Installs a TDX-capable kernel from the Ubuntu `kobuk-team/intel-tdx` PPA
 
 ### Port Forwarding
 
-The VM exposes services via QEMU port forwarding the host port 6193 which forwards to the port 7001 inside the CVM where the Cube Agent API listens.
+| Host Port | Guest Port | Service |
+| --- | --- | --- |
+| 6190 | 22 | SSH |
+| 6191 | 80 | HTTP |
+| 6192 | 443 | HTTPS |
+| 6193 | 7001 | Cube Agent API |
 
-## Post-Boot Setup
+## Cloud Deployment (GCP / Azure)
 
-### Adding Custom Models
+For deploying on cloud providers, use the configs in `hal/ubuntu/cloud/` together with the [cocos-infra](https://github.com/ultravioletrs/cocos-infra) Terraform templates. Cloud providers handle confidential computing at the hypervisor level — no custom kernel, IGVM, or module loading is needed.
 
-Pull additional models inside the VM:
-
-```bash
-ollama pull <model-name>
-```
+See [cloud/README.md](https://github.com/ultravioletrs/cube/blob/main/hal/ubuntu/cloud/README.md) in the cube repository for deployment instructions.
 
 ## Next Steps
 
