@@ -14,11 +14,11 @@ interface HeroProps {
 
 export default function UseCaseHero({ title, heroText, heroDescription, heroImage, heroImageAlt }: HeroProps) {
     return (
-        <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-background text-foreground">
+        <section className="relative pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden bg-background text-foreground">
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
             
             <div className="container relative mx-auto px-4 md:px-6">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                     <div>
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -33,7 +33,7 @@ export default function UseCaseHero({ title, heroText, heroDescription, heroImag
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.1 }}
-                            className="text-4xl md:text-5xl lg:text-7xl font-black mb-6 tracking-tight"
+                            className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight"
                         >
                             {heroText}
                         </motion.h1>
@@ -42,7 +42,7 @@ export default function UseCaseHero({ title, heroText, heroDescription, heroImag
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.2 }}
-                            className="text-xl md:text-2xl text-neutral-400 leading-relaxed mb-10"
+                            className="text-lg md:text-xl text-neutral-400 leading-relaxed mb-8"
                         >
                             {heroDescription}
                         </motion.p>

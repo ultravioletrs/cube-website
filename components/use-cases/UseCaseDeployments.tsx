@@ -16,7 +16,7 @@ interface DeploymentsProps {
 
 export default function UseCaseDeployments({ heading, description, deployments, imageUrl = "/img/attestation-proof.png", imageAlt = "Hardware Attestation Proof" }: DeploymentsProps) {
     return (
-        <section className="py-24 bg-white text-neutral-950 border-t border-neutral-200">
+        <section className="py-24 bg-background text-foreground border-t border-border">
             <div className="container mx-auto px-4 md:px-6">
                 <div className="flex flex-col lg:flex-row gap-16 items-center">
                     <motion.div 
@@ -29,7 +29,7 @@ export default function UseCaseDeployments({ heading, description, deployments, 
                         <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">
                             {heading}
                         </h2>
-                        <p className="text-neutral-600 text-xl leading-relaxed mb-8">
+                        <p className="text-muted-foreground text-xl leading-relaxed mb-8">
                             {description}
                         </p>
                         
@@ -41,14 +41,14 @@ export default function UseCaseDeployments({ heading, description, deployments, 
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                                    className="flex items-start gap-4 p-6 rounded-xl bg-neutral-50 border border-neutral-200"
+                                    className="flex items-start gap-4 p-6 rounded-xl bg-muted/50 border border-border"
                                 >
-                                    <div className="w-10 h-10 shrink-0 bg-neutral-950 rounded-lg flex items-center justify-center text-white mt-1">
+                                    <div className="w-10 h-10 shrink-0 bg-foreground rounded-lg flex items-center justify-center text-background mt-1">
                                         <Server className="w-5 h-5" />
                                     </div>
                                     <div>
                                         <h4 className="text-xl font-bold mb-2">{deployment.title}</h4>
-                                        <p className="text-neutral-600">{deployment.description}</p>
+                                        <p className="text-muted-foreground">{deployment.description}</p>
                                     </div>
                                 </motion.div>
                             ))}
@@ -67,7 +67,7 @@ export default function UseCaseDeployments({ heading, description, deployments, 
                             {/* Decorative background glow */}
                             <div className="absolute -inset-4 bg-primary/10 blur-2xl rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                             
-                            <div className="relative rounded-2xl overflow-hidden border border-neutral-200 shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-transform duration-500 hover:scale-[1.02]">
+                            <div className="relative rounded-2xl overflow-hidden border border-border shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-transform duration-500 hover:scale-[1.02]">
                                 <Image 
                                     src={imageUrl}
                                     alt={imageAlt}

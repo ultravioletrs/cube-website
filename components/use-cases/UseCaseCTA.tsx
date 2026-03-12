@@ -12,7 +12,7 @@ interface CTAProps {
 
 export default function UseCaseCTA({ heading, description }: CTAProps) {
     return (
-        <section className="relative py-32 bg-neutral-950 text-white overflow-hidden border-t border-neutral-900">
+        <section className="relative py-32 bg-neutral-950 text-white overflow-hidden border-t border-white/10">
              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:24px_24px]"></div>
              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[150px] pointer-events-none"></div>
 
