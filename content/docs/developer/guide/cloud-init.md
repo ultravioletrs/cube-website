@@ -41,17 +41,19 @@ Before running the cloud-init deployment, ensure you have:
 - A Linux host machine with KVM support
 - At least 35GB free disk space
 - QEMU installed (`qemu-system-x86_64`)
+- `cloud-image-utils` package (provides `cloud-localds`)
 - `wget` for downloading the base image
 - OVMF firmware (`/usr/share/OVMF/OVMF_CODE.fd` and `OVMF_VARS.fd`)
 
-For AMD SEV-SNP deployments, also install:
-
-- `genisoimage` — used to create the seed ISO with the custom kernel
+For AMD SEV-SNP deployments, also install `genisoimage` — used to create the seed ISO bundling the custom kernel.
 
 Install dependencies on Ubuntu/Debian:
 
 ```bash
-sudo apt-get install qemu-system-x86 wget ovmf genisoimage
+sudo apt-get install qemu-system-x86 cloud-image-utils wget ovmf
+
+# For SNP only
+sudo apt-get install genisoimage
 ```
 
 ## Configuration Files
@@ -67,7 +69,7 @@ The `hal/ubuntu/` directory contains separate cloud-init files for each CVM mode
 | `user-data-vllm-snp.yaml` | AMD SEV-SNP | vLLM |
 | `user-data-vllm-regular.yaml` | Regular KVM (no CVM) | vLLM |
 
-The `qemu.sh` script selects the appropriate file automatically based on detected or forced CVM mode.
+The `qemu.sh` script automatically selects the Ollama variants (`user-data-{mode}.yaml`) based on detected or forced CVM mode. To use vLLM, pass the corresponding `user-data-vllm-{mode}.yaml` file manually or edit `qemu.sh` to point to the desired file.
 
 ## Steps
 
@@ -115,10 +117,13 @@ See [AMD SEV-SNP](#amd-sev-snp) below for details on the custom kernel requireme
 
 ```bash
 ENABLE_CVM=tdx sudo ./qemu.sh start      # Force TDX
-ENABLE_CVM=snp sudo ./qemu.sh start      # Force SNP
 ENABLE_CVM=none sudo ./qemu.sh start     # Disable CVM
 RAM=32768M CPU=16 sudo ./qemu.sh start   # Customize resources
 ```
+
+:::note
+SNP does not support the `ENABLE_CVM=snp` shortcut — it requires the explicit two-step process (`prepare_snp` then `start_snp`) described above.
+:::
 
 ### 3. First Boot Provisioning
 
@@ -185,7 +190,7 @@ The guest kernel must be custom-built with the following configuration options:
 
 The kernel must be packaged as `.deb` files and placed in a `debs/` directory next to `qemu.sh`:
 
-```
+```text
 hal/ubuntu/
   qemu.sh
   user-data-snp.yaml
