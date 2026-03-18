@@ -92,7 +92,7 @@ Navigate to `Target packages` → `Cube packages` → `cube-agent` to configure 
 
 - **ollama** - Ollama package dependency (automatically required when selected as LLM backend)
 - **Install default models** - Current default models included are `tinyllama`, `starcoder2`, and `nomic-bert`)
-- **Custom models to install** - Specify additional models to include (comma-separated)
+- **Custom models to install** - Specify additional models to include (space-separated)
 - **Enable GPU support** - Enable GPU acceleration (requires compatible hardware)
 
 **Important Notes:**

@@ -36,7 +36,7 @@ The Buildroot HAL supports embedding custom model configuration directly into th
 
 #### Using menuconfig
 
-During HAL image configuration (see [HAL guide](/developer-guide/hal)), navigate to:
+During HAL image configuration (see [HAL guide](/docs/developer/guide/hal)), navigate to:
 
 Path: `Target packages → Cube packages → ollama`
 
@@ -258,17 +258,23 @@ After a CVM is running (regardless of which approach was used to create it), you
 
 #### 1. Transfer and Register
 
+After enabling Buildroot SSH access for `root` with either SSH keys or the development-only OpenSSH drop-in, you can copy and register a model:
+
 ```bash
-# Package a model directory on the host
-tar -czvf my-model.tar.gz /path/to/model/files/
+# Stage the files under a predictable top-level directory
+mkdir -p /tmp/my-model
+cp -R /path/to/model/files/. /tmp/my-model/
+tar -czvf my-model.tar.gz -C /tmp my-model
 
 # Copy into the CVM (port 6190 forwards to SSH port 22 inside the CVM)
 scp -P 6190 my-model.tar.gz root@localhost:/var/lib/ollama/
 
 # SSH into the CVM and register the model
 ssh -p 6190 root@localhost
-cd /var/lib/ollama && tar -xzvf my-model.tar.gz
+cd /var/lib/ollama
+gunzip -c my-model.tar.gz | tar -xvf -
 
+# The extracted model files now live under /var/lib/ollama/my-model/
 cat > /tmp/Modelfile << 'EOF'
 FROM /var/lib/ollama/my-model/weights.gguf
 PARAMETER temperature 0.7
@@ -280,7 +286,7 @@ ollama create my-custom-model -f /tmp/Modelfile
 ```
 
 <Callout type="info">
-For Ubuntu cloud-init CVMs, the default SSH user is `ultraviolet` (password: `password`). For Buildroot CVMs, the default user is `root`. The `password` credential is for local development only; change it immediately, or disable password login and use SSH keys before exposing the VM to any network.
+For Ubuntu cloud-init CVMs, the default SSH user is `ultraviolet` (password: `password`). For Buildroot CVMs, the default user is `root`, but password SSH access must be explicitly enabled for local development. Prefer SSH keys for Buildroot images, or add a development-only OpenSSH drop-in that sets `PermitRootLogin yes` and `PasswordAuthentication yes`.
 </Callout>
 
 #### 2. Verify
@@ -323,13 +329,23 @@ After deploying a custom model, verify it is accessible end-to-end through the C
 
 ```bash
 # List available models (port 6193 forwards to the Cube Agent on port 7001 inside the CVM)
-curl http://localhost:6193/v1/models
+curl --cert /etc/cube/certs/client.crt \
+  --key /etc/cube/certs/client.key \
+  --cacert /etc/cube/certs/ca.pem \
+  https://localhost:6193/v1/models
 
 # Test a chat completion request
-curl http://localhost:6193/v1/chat/completions \
+curl --cert /etc/cube/certs/client.crt \
+  --key /etc/cube/certs/client.key \
+  --cacert /etc/cube/certs/ca.pem \
+  https://localhost:6193/v1/chat/completions \
   -H "Content-Type: application/json" \
   -d '{
     "model": "my-custom-model",
     "messages": [{"role": "user", "content": "Hello"}]
   }'
 ```
+
+<Callout type="info">
+Buildroot images enable Attested TLS by default, so the Cube Agent on port `6193` expects HTTPS plus a client certificate. Use plain HTTP only if you have explicitly disabled Attested TLS in the HAL configuration.
+</Callout>
