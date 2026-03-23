@@ -92,8 +92,9 @@ context:
 - `<your-domain-id>` → the domain ID you want VS Code to use
 
 > `verifySsl: false` should be used **only for local development**.
-
-> Cube AI exposes an OpenAI-compatible API through the proxy endpoint, so Continue should be configured with `provider: openai` and the `/v1` base path.
+> Cube AI exposes an OpenAI-compatible API through the proxy endpoint,
+> so Continue should be configured with `provider: openai`
+> and the `/v1` base path.
 
 ---
 
