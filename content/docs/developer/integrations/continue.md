@@ -64,21 +64,17 @@ version: "1.0.0"
 schema: v1
 
 models:
-  - name: tinyllama
-    provider: ollama
-    model: tinyllama:1.1b
+  - name: llama3.2
+    provider: openai
+    model: llama3.2:3b
     apiKey: <pat>
-    apiBase: https://<your-cube-instance>/proxy/<your-domain-id>
-    requestOptions:
-      verifySsl: false
+    apiBase: https://<your-cube-instance>/proxy/<your-domain-id>/v1
 
   - name: starcoder2
-    provider: ollama
-    model: starcoder2:7b
+    provider: openai
+    model: starcoder2:3b
     apiKey: <pat>
-    apiBase: https://<your-cube-instance>/proxy/<your-domain-id>
-    requestOptions:
-      verifySsl: false
+    apiBase: https://<your-cube-instance>/proxy/<your-domain-id>/v1
 
 context:
   - provider: code
@@ -92,10 +88,13 @@ context:
 ### Replace
 
 - `<pat>` → your Cube AI **Personal Access Token**
-- `<your-cube-instance>` → usually `localhost`
+- `<your-cube-instance>` → your Cube AI host, for example `localhost` or `dev.cube.ultraviolet.rs`
 - `<your-domain-id>` → the domain ID you want VS Code to use
 
 > `verifySsl: false` should be used **only for local development**.
+> Cube AI exposes an OpenAI-compatible API through the proxy endpoint,
+> so Continue should be configured with `provider: openai`
+> and the `/v1` base path.
 
 ---
 
