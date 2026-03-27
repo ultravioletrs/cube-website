@@ -1,8 +1,9 @@
 import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
-    title: 'Terms of Service - Ultraviolet',
+    title: 'Terms of Service | Cube AI',
     description: 'Terms of Service for Cube AI Platform',
+    alternates: { canonical: '/terms/' },
 });
 
 export default function TermsPage() {

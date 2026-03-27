@@ -1,8 +1,9 @@
 import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
-    title: 'Imprint - Ultraviolet',
+    title: 'Imprint | Cube AI',
     description: 'Imprint and Legal Information for Ultraviolet',
+    alternates: { canonical: '/imprint/' },
 });
 
 export default function ImprintPage() {

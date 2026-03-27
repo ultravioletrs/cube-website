@@ -1,8 +1,9 @@
 import { createMetadata } from '@/lib/metadata';
 
 export const metadata = createMetadata({
-    title: 'Privacy Policy - Ultraviolet',
+    title: 'Privacy Policy | Cube AI',
     description: 'Privacy Policy for Cube AI Platform',
+    alternates: { canonical: '/privacy/' },
 });
 
 export default function PrivacyPage() {
