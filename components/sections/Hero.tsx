@@ -43,6 +43,7 @@ const Hero = () => {
                             </button>
                             <a
                                 href="mailto:info@ultraviolet.rs"
+                                aria-label="Email Ultraviolet to talk to sales about Cube AI"
                                 className="px-8 py-4 bg-background text-foreground border-2 border-border rounded-full font-bold hover:border-foreground transition-all"
                             >
                                 Talk to Sales

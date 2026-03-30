@@ -53,7 +53,7 @@ export default function UseCaseHero({ title, heroText, heroDescription, heroImag
                              transition={{ duration: 0.5, delay: 0.3 }}
                              className="flex flex-wrap gap-4"
                         >
-                            <a href="mailto:info@ultraviolet.rs" className="px-8 py-4 bg-primary text-primary-foreground font-bold rounded-full hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
+                            <a href="mailto:info@ultraviolet.rs" aria-label="Email Ultraviolet to talk to sales about Cube AI" className="px-8 py-4 bg-primary text-primary-foreground font-bold rounded-full hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
                                 Talk to Sales
                             </a>
                         </motion.div>

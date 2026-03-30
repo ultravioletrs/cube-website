@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import { createMetadata, baseUrl } from '@/lib/metadata';
 import JsonLd from '@/components/JsonLd';
+import fs from 'fs';
 
 export default async function Page(props: {
     params: Promise<{ slug?: string[] }>;
@@ -16,21 +17,31 @@ export default async function Page(props: {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { body: MDX, toc, full } = page.data as any;
 
-    const techArticleSchema = {
+    const pageUrl = `${baseUrl}/docs/${params.slug?.join('/') ?? ''}/`;
+    const dateModified = page.absolutePath
+        ? fs.statSync(page.absolutePath).mtime.toISOString().split('T')[0]
+        : new Date().toISOString().split('T')[0];
+
+    const description = page.data.description
+        ?? `${page.data.title} — Cube AI technical reference. Learn how to configure, deploy, and secure LLMs with hardware Trusted Execution Environments.`;
+
+    const techArticleSchema = page.data.title ? {
         "@context": "https://schema.org",
         "@type": "TechArticle",
         "headline": page.data.title,
-        "description": page.data.description ?? "",
-        "url": `https://cube.ultraviolet.rs/docs/${params.slug?.join('/') ?? ''}/`,
-        "isPartOf": { "@id": "https://cube.ultraviolet.rs/#website" },
-        "author": { "@type": "Organization", "@id": "https://cube.ultraviolet.rs/#organization", "name": "Ultraviolet" },
+        "description": description,
+        "mainEntityOfPage": { "@type": "WebPage", "@id": pageUrl },
+        "url": pageUrl,
+        "inLanguage": "en",
+        "isPartOf": { "@id": `${baseUrl}/#website` },
+        "author": { "@type": "Organization", "@id": `${baseUrl}/#organization`, "name": "Ultraviolet" },
         "publisher": { "@type": "Organization", "name": "Ultraviolet", "url": "https://ultraviolet.rs" },
-        "dateModified": new Date().toISOString().split('T')[0],
-    };
+        "dateModified": dateModified,
+    } : null;
 
     return (
         <>
-        <JsonLd data={techArticleSchema} />
+        {techArticleSchema && <JsonLd data={techArticleSchema} />}
         <DocsPage toc={toc} full={full}>
             <DocsTitle>{page.data.title}</DocsTitle>
             <DocsDescription>{page.data.description}</DocsDescription>

@@ -15,15 +15,23 @@ const securityHeaders = [
   },
 ];
 
+const cacheHeaders = [
+  { key: "Cache-Control", value: "public, s-maxage=3600, stale-while-revalidate=86400" },
+];
+
 const nextConfig: NextConfig = {
   output: 'export',
   trailingSlash: true,
+  poweredByHeader: false,
   images: {
     unoptimized: true,
     qualities: [100, 75],
   },
   async headers() {
-    return [{ source: "/(.*)", headers: securityHeaders }];
+    return [
+      { source: "/(.*)", headers: securityHeaders },
+      { source: "/((?!api/).*)", headers: cacheHeaders },
+    ];
   },
 };
 

@@ -41,6 +41,7 @@ export default function UseCaseCTA({ heading, description, currentSlug }: CTAPro
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                         <a
                             href="mailto:info@ultraviolet.rs"
+                            aria-label="Email Ultraviolet to request a Cube AI demo"
                             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-10 py-5 bg-primary text-primary-foreground font-bold rounded-full hover:bg-primary/90 transition-all text-lg shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 group"
                         >
                             Request a Demo
@@ -64,7 +65,7 @@ export default function UseCaseCTA({ heading, description, currentSlug }: CTAPro
                                     href={`/use-cases/${uc.slug}/`}
                                     className="text-neutral-400 hover:text-white transition-colors text-base font-medium underline-offset-4 hover:underline"
                                 >
-                                    {uc.label} →
+                                    {uc.label} <span aria-hidden="true">→</span>
                                 </Link>
                             ))}
                         </div>
