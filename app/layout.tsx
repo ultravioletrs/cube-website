@@ -26,9 +26,6 @@ export const metadata: Metadata = {
   title: "Cube AI - Secure LLM & Confidential AI Platform",
   description: "Cube AI is an open-source framework for securing Large Language Models (LLMs) with TEEs, built-in governance, and privacy-preserving AI gateways.",
   authors: [{ name: "Ultraviolet" }],
-  alternates: {
-    canonical: "/",
-  },
   robots: isProd
     ? { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } }
     : { index: false, follow: false },

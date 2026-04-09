@@ -71,6 +71,12 @@ const softwareApplicationSchema = {
   "author": { "@type": "Organization", "@id": "https://cube.ultraviolet.rs/#organization", "name": "Ultraviolet" },
 };
 
+export const metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
+
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">

@@ -3,7 +3,7 @@ import { baseUrl } from "@/lib/metadata";
 
 export const dynamic = "force-static";
 
-const isProd = baseUrl === "https://cube.ultraviolet.rs";
+const isProd = baseUrl === "https://www.cube.ultraviolet.rs";
 
 export default function robots(): MetadataRoute.Robots {
   if (!isProd) {
