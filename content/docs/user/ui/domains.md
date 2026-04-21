@@ -88,10 +88,10 @@ The active domain determines:
 Switching domains changes this context entirely, ensuring isolation between
 different environments.
 
-:::note
+<Callout type="info">
 Switching domains updates the entire UI context, including available models,
 users, and permissions.
-:::
+</Callout>
 
 ---
 

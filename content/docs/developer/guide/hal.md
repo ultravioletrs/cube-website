@@ -8,9 +8,9 @@ sidebar_position: 4
 
 Cube HAL provides the confidential-computing runtime environment for Cube AI using Buildroot to create custom Linux images optimized for confidential computing.
 
-:::info
+<Callout type="info">
 This guide covers HAL image creation using Buildroot. For managing already-built HAL images and CVMs, see the [CVM Management](/docs/developer/guide/cvm-management) guide.
-:::
+</Callout>
 
 ## Overview
 
@@ -92,7 +92,7 @@ Navigate to `Target packages` → `Cube packages` → `cube-agent` to configure 
 
 - **ollama** - Ollama package dependency (automatically required when selected as LLM backend)
 - **Install default models** - Current default models included are `tinyllama`, `starcoder2`, and `nomic-bert`)
-- **Custom models to install** - Specify additional models to include (comma-separated)
+- **Custom models to install** - Specify additional models to include (space-separated)
 - **Enable GPU support** - Enable GPU acceleration (requires compatible hardware)
 
 **Important Notes:**

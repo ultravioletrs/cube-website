@@ -19,7 +19,7 @@ as private model upload and fine-tuning.
 - **Hardware Abstraction Layer (HAL)**
 - **Cloud-Init** - Ubuntu-based deployment with cloud-init provisioning
 - **CVM Management**
-- **Private Model Upload**
+- **Private Model Upload** - Deploy custom models via HAL build-time config, cloud-init, or runtime upload
 - **Fine-Tuning Models**
 - **Guardrails** - AI safety controls for input validation and output sanitization
 
