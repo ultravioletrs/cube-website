@@ -22,7 +22,7 @@ const memberships = [
     { name: 'Confidential Computing Consortium', logo: '/img/partners/ccc.png' },
 ];
 
-function TickerStrip({ items, speed = 40, direction = 'left' }: { items: any[], speed?: number, direction?: 'left' | 'right' }) {
+function TickerStrip({ items, speed = 40, direction = 'left' }: { items: { name: string; logo: string }[], speed?: number, direction?: 'left' | 'right' }) {
     const doubled = [...items, ...items];
     const animationClass = direction === 'left' ? 'animate-marquee-left' : 'animate-marquee-right';
 
