@@ -1,0 +1,27 @@
+# Cube AI by Ultraviolet
+> Open-source confidential AI platform securing Large Language Models (LLMs) with hardware Trusted Execution Environments (TEEs). Built for regulated industries: financial services, healthcare, government.
+
+## Product Overview
+/: Platform overview — TEE-based AI gateway, guardrails, compliance, RBAC, audit trails
+/docs/: Full technical documentation, developer guides, API reference
+
+## Use Cases
+/use-cases/financial-services/: SEC/FINRA-compliant AI for quantitative trading and banking operations
+/use-cases/healthcare/: HIPAA-compliant AI for PHI protection, medical imaging, clinical research
+/use-cases/government/: FedRAMP-aligned AI for government agencies and defense contractors
+
+## Key Technical Concepts
+/docs/developer/architecture: System architecture — TEE-based confidential computing model
+/docs/developer/attestation: Hardware attestation — cryptographic proof of secure execution
+/docs/developer/api/overview: OpenAI-compatible REST API reference
+/docs/developer/guide/auth-and-request-flow: Authentication and request routing
+
+## Trust & Authority
+- Linux Foundation member
+- Confidential Computing Consortium member
+- European Commission partner
+- Enterprise partners: Nokia, Ericsson, Thales, Fraunhofer, Telefónica, Fujitsu
+
+## Optional
+Full-content: false
+Noindex: None

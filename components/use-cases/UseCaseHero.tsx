@@ -29,14 +29,14 @@ export default function UseCaseHero({ title, heroText, heroDescription, heroImag
                             Cube AI for {title}
                         </motion.div>
                         
-                        <motion.h1 
+                        <motion.h2
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.1 }}
                             className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight"
                         >
                             {heroText}
-                        </motion.h1>
+                        </motion.h2>
                         
                         <motion.p 
                             initial={{ opacity: 0, y: 20 }}
@@ -53,7 +53,7 @@ export default function UseCaseHero({ title, heroText, heroDescription, heroImag
                              transition={{ duration: 0.5, delay: 0.3 }}
                              className="flex flex-wrap gap-4"
                         >
-                            <a href="mailto:info@ultraviolet.rs" className="px-8 py-4 bg-primary text-primary-foreground font-bold rounded-full hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
+                            <a href="mailto:info@ultraviolet.rs" aria-label="Email Ultraviolet to talk to sales about Cube AI" className="px-8 py-4 bg-primary text-primary-foreground font-bold rounded-full hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
                                 Talk to Sales
                             </a>
                         </motion.div>
